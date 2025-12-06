@@ -6,6 +6,7 @@ import Register from "../pages/frontend/Register/Register";
 import Login from "../pages/frontend/Login/Login";
 import TuitionsPage from "../pages/frontend/Tutions/TutionsPage";
 import TuitionDetailsPage from "../pages/frontend/TutionDetails/TutionDetails";
+import TutorsPage from "../pages/frontend/Tutors/Tutors";
 
 const routes = createBrowserRouter([
     {
@@ -23,6 +24,10 @@ const routes = createBrowserRouter([
             {
                 path: '/tutions/:id',
                 element: <TuitionDetailsPage />
+            },
+            {
+                path: '/tutors',
+                element: <TutorsPage />
             },
             {
                 path: 'user',
