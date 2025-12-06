@@ -168,12 +168,12 @@ export function Header() {
                                         </>
                                     ) : (
                                         <div className="flex flex-col gap-3 px-4">
-                                            <a href="#" className="w-full text-center py-3 text-gray-700 font-medium border border-gray-200 rounded-lg hover:bg-gray-50">
+                                            <Link to="/user/register" className="w-full text-center py-3 text-gray-700 font-medium border border-gray-200 rounded-lg hover:bg-gray-50">
                                                 Login
-                                            </a>
-                                            <a href="#" className="w-full text-center py-3 text-white font-medium bg-emerald-600 rounded-lg hover:bg-emerald-700 shadow-lg shadow-emerald-200">
+                                            </Link>
+                                            <Link to="/user/register" className="w-full text-center py-3 text-white font-medium bg-emerald-600 rounded-lg hover:bg-emerald-700 shadow-lg shadow-emerald-200">
                                                 Register
-                                            </a>
+                                            </Link>
                                         </div>
                                     )}
                                 </div>
