@@ -1,4 +1,5 @@
 import { motion } from "motion/react"
+import { Link } from "react-router";
 export function Hero() {
     return (
         <div>
@@ -81,7 +82,7 @@ export function Hero() {
                                     whileTap={{ scale: 0.95 }}
                                     className="px-8 py-4 bg-white text-slate-700 border border-slate-200 font-bold rounded-xl hover:bg-gray-50 hover:border-emerald-300 hover:text-emerald-600 transition-colors"
                                 >
-                                    Become a Tutor
+                                    <Link to={'/user/register'}>Become a Tutor</Link>
                                 </motion.button>
                             </motion.div>
 
