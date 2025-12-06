@@ -1,3 +1,4 @@
+import { motion } from "motion/react"
 const TuitionDetailsPage = () => {
     // Mock Data for a single job
     const job = {
