@@ -74,7 +74,7 @@ const TuitionsPage = () => {
         <div className="min-h-screen bg-gray-50 pt-24 pb-12">
             <div className="container mx-auto px-4 md:px-6">
                 
-                {/* Page Header */}
+                
                 <div className="mb-8">
                     <h1 className="text-3xl font-bold text-gray-800">Available Tuitions</h1>
                     <p className="text-gray-500 mt-2">Browse and apply for the latest tuition jobs near you.</p>
@@ -82,7 +82,7 @@ const TuitionsPage = () => {
 
                 <div className="flex flex-col lg:flex-row gap-8">
                     
-                    {/* --- Sidebar Filters --- */}
+                    
                     <div className="w-full lg:w-1/4">
                         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 sticky top-28">
                             <div className="flex justify-between items-center mb-4">
@@ -90,7 +90,7 @@ const TuitionsPage = () => {
                                 <button className="text-sm text-emerald-600 font-medium hover:underline">Reset</button>
                             </div>
 
-                            {/* Search */}
+                            
                             <div className="mb-6">
                                 <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Search</label>
                                 <div className="relative">
@@ -99,7 +99,7 @@ const TuitionsPage = () => {
                                 </div>
                             </div>
 
-                            {/* Location Filter */}
+                            
                             <div className="mb-6">
                                 <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Division</label>
                                 <select className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 outline-none text-gray-600">
@@ -111,7 +111,7 @@ const TuitionsPage = () => {
                                 </select>
                             </div>
 
-                            {/* Medium Filter */}
+                            
                             <div className="mb-6">
                                 <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Medium</label>
                                 <div className="space-y-2">
@@ -124,7 +124,7 @@ const TuitionsPage = () => {
                                 </div>
                             </div>
 
-                            {/* Class Filter */}
+                            
                             <div className="mb-6">
                                 <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Class / Grade</label>
                                 <select className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 outline-none text-gray-600">
@@ -136,17 +136,17 @@ const TuitionsPage = () => {
                                 </select>
                             </div>
 
-                            {/* Apply Button */}
+                            
                             <button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 rounded-lg transition-colors shadow-sm">
                                 Apply Filters
                             </button>
                         </div>
                     </div>
 
-                    {/* --- Job Listings --- */}
+                    
                     <div className="w-full lg:w-3/4">
                         
-                        {/* Sort Bar */}
+                        
                         <div className="flex justify-between items-center mb-6 bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
                             <p className="text-sm text-gray-500"><span className="font-bold text-gray-800">{tuitionJobs.length}</span> Jobs Found</p>
                             <div className="flex items-center gap-2">
@@ -159,7 +159,7 @@ const TuitionsPage = () => {
                             </div>
                         </div>
 
-                        {/* Jobs Grid */}
+                        
                         <div className="space-y-4">
                             {tuitionJobs.map((job) => (
                                 <motion.div 
@@ -171,7 +171,7 @@ const TuitionsPage = () => {
                                     className="bg-white rounded-xl p-6 border border-gray-100 hover:border-emerald-200 hover:shadow-lg transition-all duration-300 group"
                                 >
                                     <div className="flex flex-col md:flex-row justify-between gap-4">
-                                        {/* Job Content */}
+                                        
                                         <div className="grow">
                                             <div className="flex items-center gap-2 mb-2">
                                                 <span className="bg-emerald-50 text-emerald-700 text-xs font-bold px-2 py-1 rounded border border-emerald-100">
@@ -214,7 +214,7 @@ const TuitionsPage = () => {
                                             </div>
                                         </div>
 
-                                        {/* Action Section */}
+                                        
                                         <div className="flex flex-row md:flex-col justify-between items-end md:items-center min-w-[120px] gap-4 md:border-l md:border-gray-100 md:pl-6">
                                             <span className="text-xs text-gray-400 whitespace-nowrap bg-gray-50 px-2 py-1 rounded">
                                                 {job.posted}
@@ -228,7 +228,7 @@ const TuitionsPage = () => {
                             ))}
                         </div>
 
-                        {/* Pagination */}
+                        
                         <div className="flex justify-center mt-12 gap-2">
                             <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 hover:text-emerald-600 transition-colors">
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" /></svg>

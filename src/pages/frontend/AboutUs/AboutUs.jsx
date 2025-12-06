@@ -3,9 +3,9 @@ const AboutPage = () => {
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">
             
-            {/* 1. HERO SECTION */}
+            
             <section className="bg-slate-900 text-white pt-40 pb-32 relative overflow-hidden">
-                {/* Background Pattern */}
+                
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,var(--tw-gradient-stops))] from-emerald-900/30 to-transparent"></div>
                 
                 <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
@@ -26,7 +26,7 @@ const AboutPage = () => {
                 </div>
             </section>
 
-            {/* 2. STATS SECTION */}
+            
             <div className="container mx-auto px-4 -mt-16 relative z-20">
                 <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-gray-100">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-gray-100">
@@ -50,7 +50,7 @@ const AboutPage = () => {
                 </div>
             </div>
 
-            {/* 3. MISSION & VISION */}
+            
             <section className="py-24">
                 <div className="container mx-auto px-4 md:px-6">
                     <div className="flex flex-col md:flex-row gap-16 items-center">
@@ -84,7 +84,7 @@ const AboutPage = () => {
                 </div>
             </section>
 
-            {/* 4. CORE VALUES */}
+            
             <section className="py-24 bg-gray-100">
                 <div className="container mx-auto px-4 md:px-6">
                     <div className="text-center mb-16">
@@ -128,7 +128,7 @@ const AboutPage = () => {
                 </div>
             </section>
 
-            {/* 5. CTA SECTION */}
+            
             <section className="py-24">
                 <div className="container mx-auto px-4 md:px-6 text-center">
                     <div className="bg-emerald-600 rounded-3xl p-12 md:p-20 text-white relative overflow-hidden">

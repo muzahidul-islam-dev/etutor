@@ -54,7 +54,7 @@ export function Whychoose() {
         <div>
             <div className="py-20 bg-white border-t border-gray-100">
                 <div className="container mx-auto px-4 md:px-6">
-                    {/* Section Header */}
+                    
                     <div className="text-center mb-16">
                         <div className="inline-block px-3 py-1 mb-3 text-xs font-semibold tracking-wider text-emerald-600 uppercase bg-emerald-100/50 rounded-full">
                             Our Benefits
@@ -67,7 +67,7 @@ export function Whychoose() {
                         </p>
                     </div>
 
-                    {/* Features Grid */}
+                    
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {features.map((feature, index) => (
                             <motion.div

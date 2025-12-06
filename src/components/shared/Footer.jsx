@@ -12,7 +12,7 @@ export function Footer() {
                 <div className="container mx-auto px-4 md:px-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
                         
-                        {/* 1. About Platform */}
+                        
                         <div>
                             <div className="flex items-center gap-1 mb-6">
                                 <span className="text-2xl font-extrabold text-orange-500">e</span>
@@ -24,7 +24,7 @@ export function Footer() {
                             </p>
                         </div>
 
-                        {/* 2. Quick Links */}
+                        
                         <div>
                             <h3 className="text-white text-lg font-bold mb-6">Quick Links</h3>
                             <ul className="space-y-3 text-sm">
@@ -42,7 +42,7 @@ export function Footer() {
                             </ul>
                         </div>
 
-                        {/* 3. Contact Information */}
+                        
                         <div>
                             <h3 className="text-white text-lg font-bold mb-6">Contact Us</h3>
                             <ul className="space-y-4 text-sm text-slate-400">
@@ -61,20 +61,20 @@ export function Footer() {
                             </ul>
                         </div>
 
-                        {/* 4. Social Media */}
+                        
                         <div>
                             <h3 className="text-white text-lg font-bold mb-6">Follow Us</h3>
                             <p className="text-slate-400 text-sm mb-4">Stay connected with us for updates and news.</p>
                             <div className="flex gap-4">
-                                {/* Facebook */}
+                                
                                 <a href="#" className="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition-all duration-300">
                                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
                                 </a>
-                                {/* X (Formerly Twitter) */}
+                                
                                 <a href="#" className="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-black hover:text-white transition-all duration-300 border border-slate-700 hover:border-slate-500">
                                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
                                 </a>
-                                {/* LinkedIn */}
+                                
                                 <a href="#" className="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-blue-700 hover:text-white transition-all duration-300">
                                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path><circle cx="4" cy="4" r="2"></circle></svg>
                                 </a>
@@ -83,7 +83,7 @@ export function Footer() {
 
                     </div>
 
-                    {/* Copyright Section */}
+                    
                     <div className="border-t border-slate-800 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center gap-4">
                         <p className="text-slate-500 text-sm text-center md:text-left">
                             &copy; {new Date().getFullYear()} eTutor. All rights reserved.

@@ -4,7 +4,7 @@ export function Platformworks() {
         <div>
             <div className="py-20 bg-gray-50 border-t border-gray-100">
                 <div className="container mx-auto px-4 md:px-6">
-                    {/* Section Header */}
+                    
                     <div className="text-center mb-16">
                         <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
                             How the Platform Works
@@ -14,12 +14,12 @@ export function Platformworks() {
                         </p>
                     </div>
 
-                    {/* 3-Step Visual Grid */}
+                    
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-                        {/* Connecting Line (Desktop Only) */}
+                        
                         <div className="hidden md:block absolute top-12 left-[16%] right-[16%] h-0.5 bg-gray-200 z-0"></div>
 
-                        {/* Step 1 */}
+                        
                         <motion.div 
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -38,7 +38,7 @@ export function Platformworks() {
                             </p>
                         </motion.div>
 
-                        {/* Step 2 */}
+                        
                         <motion.div 
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -57,7 +57,7 @@ export function Platformworks() {
                             </p>
                         </motion.div>
 
-                        {/* Step 3 */}
+                        
                         <motion.div 
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}

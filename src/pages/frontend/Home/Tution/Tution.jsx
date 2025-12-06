@@ -51,7 +51,7 @@ export function Tution() {
         <div>
             <div className="py-20 bg-gray-50 border-t border-gray-100">
                 <div className="container mx-auto px-4 md:px-6">
-                    {/* Section Header */}
+                    
                     <div className="text-center mb-16">
                         <div className="inline-block px-3 py-1 mb-3 text-xs font-semibold tracking-wider text-emerald-600 uppercase bg-emerald-100/50 rounded-full">
                             Recent Opportunities
@@ -65,7 +65,7 @@ export function Tution() {
                         </p>
                     </div>
 
-                    {/* Jobs Grid */}
+                    
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {latestTuitions.map((job) => (
                             <motion.div 
@@ -74,7 +74,7 @@ export function Tution() {
                                 transition={{ type: "spring", stiffness: 300 }}
                                 className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-xl transition-all duration-300 flex flex-col group"
                             >
-                                {/* Card Header */}
+                                
                                 <div className="flex justify-between items-start mb-4">
                                     <div className="bg-emerald-50 text-emerald-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide group-hover:bg-emerald-600 group-hover:text-white transition-colors">
                                         {job.subject}
@@ -88,7 +88,7 @@ export function Tution() {
                                 <h3 className="text-lg font-bold text-gray-800 mb-1">{job.class}</h3>
                                 <p className="text-sm text-gray-500 mb-4">{job.medium}</p>
                                 
-                                {/* Card Body Details */}
+                                
                                 <div className="space-y-3 mb-6 grow">
                                     <div className="flex items-center text-sm text-gray-600 gap-3">
                                         <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
@@ -104,7 +104,7 @@ export function Tution() {
                                     </div>
                                 </div>
 
-                                {/* Apply Button */}
+                                
                                 <Link to={`/tutions/1`} className="w-full justify-center grid cursor-pointer py-2.5 rounded-lg border border-emerald-600 text-emerald-600 font-bold text-sm hover:bg-emerald-600 hover:text-white transition-all duration-300 shadow-sm hover:shadow-md">
                                     View Details
                                 </Link>
@@ -112,7 +112,7 @@ export function Tution() {
                         ))}
                     </div>
 
-                    {/* View All Button */}
+                    
                     <div className="text-center mt-12">
                         <button className="px-8 py-3 bg-white text-slate-700 font-bold rounded-xl border border-gray-200 hover:border-emerald-500 hover:text-emerald-600 hover:shadow-lg transition-all duration-300 flex items-center gap-2 mx-auto">
                             View All Jobs

@@ -37,7 +37,7 @@ const TutorProfilePage = () => {
         <div className="min-h-screen bg-gray-50 pt-28 pb-12">
             <div className="container mx-auto px-4 md:px-6">
                 
-                {/* Breadcrumb */}
+                
                 <div className="text-sm text-gray-500 mb-6 flex items-center gap-2">
                     <a href="#" className="hover:text-emerald-600">Home</a>
                     <svg className="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
@@ -48,17 +48,17 @@ const TutorProfilePage = () => {
 
                 <div className="flex flex-col lg:flex-row gap-8">
                     
-                    {/* --- LEFT COLUMN: Profile Content --- */}
+                    
                     <div className="w-full lg:w-2/3">
                         
-                        {/* Profile Header Card */}
+                        
                         <div className="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm mb-6 relative">
-                            {/* Cover/Banner Accent */}
+                            
                             <div className="h-32 bg-linear-to-r from-emerald-500 to-teal-600"></div>
                             
                             <div className="px-8 pb-8">
                                 <div className="flex flex-col md:flex-row items-center md:items-end -mt-12 mb-6 gap-6 text-center md:text-left">
-                                    {/* Profile Image */}
+                                    
                                     <div className="relative">
                                         <div className="w-32 h-32 rounded-full border-4 border-white shadow-md overflow-hidden bg-white">
                                             <img src={tutor.image} alt={tutor.name} className="w-full h-full object-cover" />
@@ -70,7 +70,7 @@ const TutorProfilePage = () => {
                                         )}
                                     </div>
                                     
-                                    {/* Name & Headline */}
+                                    
                                     <div className="grow">
                                         <h1 className="text-3xl font-bold text-gray-800 mb-1">{tutor.name}</h1>
                                         <p className="text-emerald-600 font-medium mb-1">{tutor.department}</p>
@@ -78,7 +78,7 @@ const TutorProfilePage = () => {
                                     </div>
                                 </div>
 
-                                {/* Stats Grid */}
+                                
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-6 border-t border-gray-100">
                                     <div className="text-center md:text-left">
                                         <p className="text-xs text-gray-400 uppercase font-semibold">Rating</p>
@@ -103,7 +103,7 @@ const TutorProfilePage = () => {
                             </div>
                         </div>
 
-                        {/* About Section */}
+                        
                         <div className="bg-white rounded-xl p-6 md:p-8 border border-gray-100 shadow-sm mb-6">
                             <h3 className="text-lg font-bold text-gray-800 mb-4 border-l-4 border-emerald-500 pl-3">
                                 About Me
@@ -113,7 +113,7 @@ const TutorProfilePage = () => {
                             </p>
                         </div>
 
-                        {/* Education Section */}
+                        
                         <div className="bg-white rounded-xl p-6 md:p-8 border border-gray-100 shadow-sm mb-6">
                             <h3 className="text-lg font-bold text-gray-800 mb-6 border-l-4 border-emerald-500 pl-3">
                                 Education
@@ -134,7 +134,7 @@ const TutorProfilePage = () => {
                             </div>
                         </div>
 
-                        {/* Tuition Info Section */}
+                        
                         <div className="bg-white rounded-xl p-6 md:p-8 border border-gray-100 shadow-sm mb-6">
                             <h3 className="text-lg font-bold text-gray-800 mb-6 border-l-4 border-emerald-500 pl-3">
                                 Tuition Information
@@ -171,7 +171,7 @@ const TutorProfilePage = () => {
                             </div>
                         </div>
 
-                        {/* Reviews Section */}
+                        
                         <div className="bg-white rounded-xl p-6 md:p-8 border border-gray-100 shadow-sm">
                             <div className="flex items-center justify-between mb-6">
                                 <h3 className="text-lg font-bold text-gray-800 border-l-4 border-emerald-500 pl-3">Reviews</h3>
@@ -200,7 +200,7 @@ const TutorProfilePage = () => {
 
                     </div>
 
-                    {/* --- RIGHT COLUMN: Sidebar (Sticky) --- */}
+                    
                     <div className="w-full lg:w-1/3">
                         <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-lg sticky top-28">
                             <div className="text-center mb-6">

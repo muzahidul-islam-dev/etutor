@@ -4,7 +4,7 @@ const ContactPage = () => {
         <div className="min-h-screen bg-gray-50 flex flex-col">
             
 
-            {/* Main Content Overlap */}
+            
             <div className="container mx-auto px-4 pt-32 pb-20 grow relative z-20">
                 <motion.div 
                     initial={{ opacity: 0, y: 30 }}
@@ -13,9 +13,9 @@ const ContactPage = () => {
                     className="bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col lg:flex-row max-w-6xl mx-auto min-h-[600px]"
                 >
                     
-                    {/* Left Column: Contact Info (Dark Panel) */}
+                    
                     <div className="w-full lg:w-5/12 bg-emerald-700 text-white p-10 flex flex-col justify-between relative overflow-hidden">
-                        {/* Decorative Circles */}
+                        
                         <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full translate-x-1/2 -translate-y-1/2"></div>
                         <div className="absolute bottom-0 left-0 w-40 h-40 bg-white/10 rounded-full -translate-x-1/2 translate-y-1/2"></div>
 
@@ -60,7 +60,7 @@ const ContactPage = () => {
 
                         <div className="relative z-10 mt-12">
                             <div className="flex gap-4">
-                                {/* Social Icons with Hover Effect */}
+                                
                                 {['facebook', 'twitter', 'instagram', 'linkedin'].map((social) => (
                                     <a key={social} href="#" className="w-10 h-10 rounded-full border border-emerald-400/50 flex items-center justify-center hover:bg-white hover:text-emerald-700 transition-all duration-300">
                                         <span className="sr-only">{social}</span>
@@ -71,7 +71,7 @@ const ContactPage = () => {
                         </div>
                     </div>
 
-                    {/* Right Column: Form (Light Panel) */}
+                    
                     <div className="w-full lg:w-7/12 p-10 lg:p-14 bg-white">
                         <form className="space-y-6">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -24,14 +24,14 @@ const Login = () => {
                 transition={{ duration: 0.5 }}
                 className="bg-white rounded-2xl shadow-xl overflow-hidden max-w-5xl w-full flex flex-col md:flex-row min-h-[600px]"
             >
-                {/* 1. LEFT SIDE: Visual & Welcome Message */}
+                
                 <div className="w-full md:w-5/12 p-10 bg-emerald-600 text-white flex flex-col justify-between relative overflow-hidden">
                     
-                    {/* Background Patterns */}
+                    
                     <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full translate-x-1/3 -translate-y-1/3 blur-3xl"></div>
                     <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/10 rounded-full -translate-x-1/3 translate-y-1/3 blur-3xl"></div>
                     
-                    {/* Top Content */}
+                    
                     <div className="relative z-10 mt-10">
                         <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center mb-6 shadow-lg">
                             <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" /></svg>
@@ -42,7 +42,7 @@ const Login = () => {
                         </p>
                     </div>
 
-                    {/* Bottom Content */}
+                    
                     <div className="relative z-10 mb-10">
                         <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/10">
                             <p className="text-sm font-medium opacity-90 italic">
@@ -61,7 +61,7 @@ const Login = () => {
                     </div>
                 </div>
 
-                {/* 2. RIGHT SIDE: Login Form */}
+                
                 <div className="w-full md:w-7/12 p-8 md:p-12 bg-white flex flex-col justify-center">
                     <div className="max-w-md mx-auto w-full">
                         <div className="text-center mb-10">
@@ -69,7 +69,7 @@ const Login = () => {
                             <p className="text-gray-500 mt-2">Enter your details to access your account</p>
                         </div>
 
-                        {/* Social Login: Google */}
+                        
                         <button 
                             onClick={handleGoogleLogin}
                             className="w-full flex items-center justify-center gap-3 bg-white border border-gray-300 text-gray-700 font-semibold py-3 rounded-lg hover:bg-gray-50 transition-colors mb-6 shadow-sm"
@@ -89,9 +89,9 @@ const Login = () => {
                             <div className="grow border-t border-gray-200"></div>
                         </div>
 
-                        {/* Login Form */}
+                        
                         <form className="space-y-5" onSubmit={handleSubmit}>
-                            {/* Email */}
+                            
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
                                 <div className="relative group">
@@ -102,7 +102,7 @@ const Login = () => {
                                 </div>
                             </div>
 
-                            {/* Password */}
+                            
                             <div>
                                 <div className="flex justify-between items-center mb-1">
                                     <label className="block text-sm font-medium text-gray-700">Password</label>
@@ -116,7 +116,7 @@ const Login = () => {
                                 </div>
                             </div>
 
-                            {/* Remember Me Checkbox */}
+                            
                             <div className="flex items-center">
                                 <input id="remember-me" type="checkbox" className="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded cursor-pointer" />
                                 <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-600 cursor-pointer">
@@ -124,7 +124,7 @@ const Login = () => {
                                 </label>
                             </div>
 
-                            {/* Submit Button */}
+                            
                             <button 
                                 type="submit"
                                 disabled={isLoading}

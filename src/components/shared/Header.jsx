@@ -53,13 +53,13 @@ export function Header() {
                 <div className="container mx-auto px-4 md:px-6">
                     <div className="flex justify-between items-center">
                         
-                        {/* 1. LOGO */}
+                        
                         <Link to={'/'} className="flex items-center gap-1 group">
                             <span className="text-2xl font-extrabold text-orange-500 group-hover:scale-110 transition-transform">e</span>
                             <span className="text-2xl font-bold text-emerald-600">Tutor</span>
                         </Link>
 
-                        {/* 2. DESKTOP MENU (Hidden on Mobile) */}
+                        
                         <div className="hidden lg:flex items-center space-x-1">
                             {navLinks.map((link) => (
                                 <Link 
@@ -72,7 +72,7 @@ export function Header() {
                             ))}
                         </div>
 
-                        {/* 3. RIGHT SIDE: Auth Buttons / Profile */}
+                        
                         <div className="hidden lg:flex items-center gap-3">
                             {isLoggedIn ? (
                                 <>
@@ -80,7 +80,7 @@ export function Header() {
                                         Dashboard
                                     </a>
                                     
-                                    {/* Profile Dropdown */}
+                                    
                                     <div className="relative" ref={profileRef}>
                                         <button 
                                             onClick={() => setIsProfileOpen(!isProfileOpen)}
@@ -95,7 +95,7 @@ export function Header() {
                                             </div>
                                         </button>
 
-                                        {/* Dropdown Menu */}
+                                        
                                         {isProfileOpen && (
                                             <div className="absolute right-0 mt-3 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2 overflow-hidden animate-fade-in-down">
                                                 <div className="px-4 py-3 border-b border-gray-50 bg-gray-50/50">
@@ -126,7 +126,7 @@ export function Header() {
                             )}
                         </div>
 
-                        {/* MOBILE MENU BUTTON */}
+                        
                         <button 
                             className="lg:hidden p-2 text-gray-600 hover:text-emerald-600 focus:outline-none"
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -139,7 +139,7 @@ export function Header() {
                         </button>
                     </div>
 
-                    {/* MOBILE MENU DROPDOWN */}
+                    
                     {isMobileMenuOpen && (
                         <div className="lg:hidden mt-4 pb-4 border-t border-gray-100 animate-fade-in">
                             <div className="flex flex-col space-y-2 mt-4">

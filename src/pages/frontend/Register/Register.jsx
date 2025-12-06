@@ -20,14 +20,14 @@ const Register = () => {
                 transition={{ duration: 0.5 }}
                 className="bg-white rounded-2xl shadow-xl overflow-hidden max-w-5xl w-full flex flex-col md:flex-row min-h-[600px]"
             >
-                {/* 1. LEFT SIDE: Visual & Info */}
+                
                 <div className={`w-full md:w-5/12 p-10 text-white flex flex-col justify-between relative overflow-hidden transition-colors duration-500 ${role === 'student' ? 'bg-emerald-600' : 'bg-orange-500'}`}>
                     
-                    {/* Background Patterns */}
+                    
                     <div className="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl"></div>
                     <div className="absolute bottom-0 right-0 w-64 h-64 bg-white/10 rounded-full translate-x-1/2 translate-y-1/2 blur-3xl"></div>
                     
-                    {/* Top Content */}
+                    
                     <div className="relative z-10">
                         <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center mb-6 shadow-lg">
                             {role === 'student' ? (
@@ -53,7 +53,7 @@ const Register = () => {
                         </motion.div>
                     </div>
 
-                    {/* Bottom Features List */}
+                    
                     <div className="relative z-10 space-y-4">
                         <div className="flex items-center gap-3 bg-white/10 p-3 rounded-lg backdrop-blur-sm">
                             <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
@@ -66,7 +66,7 @@ const Register = () => {
                     </div>
                 </div>
 
-                {/* 2. RIGHT SIDE: Registration Form */}
+                
                 <div className="w-full md:w-7/12 p-8 md:p-12 bg-white flex flex-col justify-center">
                     <div className="max-w-md mx-auto w-full">
                         <div className="text-center mb-8">
@@ -74,9 +74,9 @@ const Register = () => {
                             <p className="text-gray-500 text-sm mt-2">Join us as a Student or Tutor</p>
                         </div>
 
-                        {/* Role Selection Tabs */}
+                        
                         <div className="flex bg-gray-100 p-1.5 rounded-xl mb-8 relative">
-                            {/* Animated Background Pill */}
+                            
                             <motion.div 
                                 className="absolute top-1.5 bottom-1.5 rounded-lg bg-white shadow-sm z-0"
                                 layoutId="roleIndicator"
@@ -104,9 +104,9 @@ const Register = () => {
                             </button>
                         </div>
 
-                        {/* Form Fields */}
+                        
                         <form className="space-y-5" onSubmit={handleSubmit}>
-                            {/* Name */}
+                            
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
                                 <div className="relative group">
@@ -117,7 +117,7 @@ const Register = () => {
                                 </div>
                             </div>
 
-                            {/* Phone */}
+                            
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
                                 <div className="relative group">
@@ -128,7 +128,7 @@ const Register = () => {
                                 </div>
                             </div>
 
-                            {/* Email */}
+                            
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
                                 <div className="relative group">
@@ -139,7 +139,7 @@ const Register = () => {
                                 </div>
                             </div>
 
-                            {/* Password */}
+                            
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
                                 <div className="relative group">
@@ -150,7 +150,7 @@ const Register = () => {
                                 </div>
                             </div>
 
-                            {/* Submit Button */}
+                            
                             <button 
                                 type="submit"
                                 disabled={isLoading}

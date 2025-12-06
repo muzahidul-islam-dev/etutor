@@ -32,7 +32,7 @@ const TuitionDetailsPage = () => {
         <div className="min-h-screen bg-gray-50 pt-28 pb-12">
             <div className="container mx-auto px-4 md:px-6">
                 
-                {/* Breadcrumb */}
+                
                 <div className="text-sm text-gray-500 mb-6 flex items-center gap-2">
                     <a href="#" className="hover:text-emerald-600">Home</a>
                     <svg className="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
@@ -43,10 +43,10 @@ const TuitionDetailsPage = () => {
 
                 <div className="flex flex-col lg:flex-row gap-8">
                     
-                    {/* --- LEFT COLUMN: Main Details --- */}
+                    
                     <div className="w-full lg:w-2/3">
                         
-                        {/* Header Card */}
+                        
                         <div className="bg-white rounded-xl p-6 md:p-8 border border-gray-100 shadow-sm mb-6">
                             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
                                 <h1 className="text-2xl md:text-3xl font-bold text-gray-800 leading-tight">
@@ -72,7 +72,7 @@ const TuitionDetailsPage = () => {
                                 </span>
                             </div>
 
-                            {/* Key Details Grid */}
+                            
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-8">
                                 <div className="space-y-1">
                                     <p className="text-xs text-gray-400 uppercase font-semibold">Medium</p>
@@ -100,7 +100,7 @@ const TuitionDetailsPage = () => {
                                 </div>
                             </div>
 
-                            {/* Subjects Tag Cloud */}
+                            
                             <div className="mt-8 pt-6 border-t border-gray-100">
                                 <p className="text-xs text-gray-400 uppercase font-semibold mb-3">Subjects</p>
                                 <div className="flex flex-wrap gap-2">
@@ -113,7 +113,7 @@ const TuitionDetailsPage = () => {
                             </div>
                         </div>
 
-                        {/* Description Section */}
+                        
                         <div className="bg-white rounded-xl p-6 md:p-8 border border-gray-100 shadow-sm mb-6">
                             <h3 className="text-lg font-bold text-gray-800 mb-4 border-l-4 border-emerald-500 pl-3">
                                 Requirement Details
@@ -135,10 +135,10 @@ const TuitionDetailsPage = () => {
 
                     </div>
 
-                    {/* --- RIGHT COLUMN: Sidebar --- */}
+                    
                     <div className="w-full lg:w-1/3 space-y-6">
                         
-                        {/* 1. Apply Card (Sticky) */}
+                        
                         <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-lg sticky top-28">
                             <div className="text-center mb-6">
                                 <p className="text-sm text-gray-500 mb-1">Salary</p>
