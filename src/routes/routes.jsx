@@ -3,6 +3,8 @@ import App from "../App";
 import { Rootlayout } from "../components/shared/RootLayout";
 import { Home } from "../pages/frontend/Home/Home";
 import Register from "../pages/frontend/Register/Register";
+import Login from "../pages/frontend/Login/Login";
+import TuitionsPage from "../pages/frontend/Tutions/TutionsPage";
 
 const routes = createBrowserRouter([
     {
@@ -14,12 +16,20 @@ const routes = createBrowserRouter([
                 element: <Home />
             },
             {
+                path: '/tutions',
+                element: <TuitionsPage />
+            },
+            {
                 path: 'user',
                 element: <Outlet />,
                 children: [
                     {
                         path: 'register',
                         element: <Register />
+                    },
+                    {
+                        path: 'login',
+                        element: <Login />
                     }
                 ]
             }

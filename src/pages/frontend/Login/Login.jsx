@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from "motion/react"
+import { Link } from "react-router";
 const Login = () => {
     const [isLoading, setIsLoading] = useState(false);
 
@@ -146,7 +147,7 @@ const Login = () => {
                         <div className="text-center mt-8">
                             <p className="text-sm text-gray-600">
                                 Don't have an account? 
-                                <a href="#" className="text-emerald-600 font-bold hover:underline ml-1">Register Now</a>
+                                <Link to="/user/register" className="text-emerald-600 font-bold hover:underline ml-1">Register Now</Link>
                             </p>
                         </div>
                     </div>

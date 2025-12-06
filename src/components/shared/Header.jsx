@@ -37,8 +37,8 @@ export function Header() {
     }, []);
 
     const navLinks = [
-        { name: 'Home', href: '#' },
-        { name: 'Tuitions', href: '#' },
+        { name: 'Home', href: '/' },
+        { name: 'Tuitions', href: '/tutions' },
         { name: 'Tutors', href: '#' },
         { name: 'About', href: '#' },
         { name: 'Contact', href: '#' },
@@ -116,9 +116,9 @@ export function Header() {
                                 </>
                             ) : (
                                 <>
-                                    <a href="#" className="px-5 py-2.5 text-sm font-medium text-gray-600 hover:text-emerald-600 transition-colors">
+                                    <Link to="/user/login" className="px-5 py-2.5 text-sm font-medium text-gray-600 hover:text-emerald-600 transition-colors">
                                         Login
-                                    </a>
+                                    </Link>
                                     <Link to="/user/register" className="px-5 py-2.5 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 shadow-md shadow-emerald-200 transition-all hover:shadow-lg transform hover:-translate-y-0.5">
                                         Register
                                     </Link>
@@ -171,7 +171,7 @@ export function Header() {
                                             <Link to="/user/register" className="w-full text-center py-3 text-gray-700 font-medium border border-gray-200 rounded-lg hover:bg-gray-50">
                                                 Login
                                             </Link>
-                                            <Link to="/user/register" className="w-full text-center py-3 text-white font-medium bg-emerald-600 rounded-lg hover:bg-emerald-700 shadow-lg shadow-emerald-200">
+                                            <Link to="/user/login" className="w-full text-center py-3 text-white font-medium bg-emerald-600 rounded-lg hover:bg-emerald-700 shadow-lg shadow-emerald-200">
                                                 Register
                                             </Link>
                                         </div>
