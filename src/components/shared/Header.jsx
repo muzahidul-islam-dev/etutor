@@ -40,8 +40,8 @@ export function Header() {
         { name: 'Home', href: '/' },
         { name: 'Tuitions', href: '/tutions' },
         { name: 'Tutors', href: '/tutors' },
-        { name: 'About', href: '#' },
-        { name: 'Contact', href: '#' },
+        { name: 'About', href: '/about' },
+        { name: 'Contact', href: '/contact' },
     ];
     return (
         <div>

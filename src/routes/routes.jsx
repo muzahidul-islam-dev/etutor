@@ -7,6 +7,9 @@ import Login from "../pages/frontend/Login/Login";
 import TuitionsPage from "../pages/frontend/Tutions/TutionsPage";
 import TuitionDetailsPage from "../pages/frontend/TutionDetails/TutionDetails";
 import TutorsPage from "../pages/frontend/Tutors/Tutors";
+import TutorProfilePage from "../pages/frontend/SingleTutor/SingleTutor";
+import ContactPage from "../pages/frontend/Contact/Contact";
+import AboutPage from "../pages/frontend/AboutUs/AboutUs";
 
 const routes = createBrowserRouter([
     {
@@ -28,6 +31,18 @@ const routes = createBrowserRouter([
             {
                 path: '/tutors',
                 element: <TutorsPage />
+            },
+            {
+                path: '/tutors/:id',
+                element: <TutorProfilePage />
+            },
+            {
+                path: '/contact',
+                element: <ContactPage />
+            },
+            {
+                path: '/about',
+                element: <AboutPage />
             },
             {
                 path: 'user',

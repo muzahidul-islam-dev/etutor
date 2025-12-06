@@ -1,4 +1,5 @@
 import { motion } from "motion/react"
+import { Link } from "react-router";
 const TutorsPage = () => {
     const tutors = [
         {
@@ -224,9 +225,9 @@ const TutorsPage = () => {
                                     </div>
 
                                     {/* Action Button */}
-                                    <button className="w-full bg-white border border-gray-200 text-gray-700 font-bold py-2 rounded-lg hover:bg-emerald-600 hover:text-white hover:border-emerald-600 transition-all shadow-sm hover:shadow-md mt-auto">
+                                    <Link to={'/tutors/1'} className="w-full bg-white border border-gray-200 text-gray-700 font-bold py-2 rounded-lg hover:bg-emerald-600 hover:text-white hover:border-emerald-600 transition-all shadow-sm hover:shadow-md mt-auto">
                                         View Profile
-                                    </button>
+                                    </Link>
                                 </motion.div>
                             ))}
                         </div>
