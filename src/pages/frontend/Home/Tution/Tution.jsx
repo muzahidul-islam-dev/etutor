@@ -1,4 +1,5 @@
 import { motion } from "motion/react"
+import { Link } from "react-router";
 export function Tution() {
     const latestTuitions = [
         {
@@ -104,9 +105,9 @@ export function Tution() {
                                 </div>
 
                                 {/* Apply Button */}
-                                <button className="w-full py-2.5 rounded-lg border border-emerald-600 text-emerald-600 font-bold text-sm hover:bg-emerald-600 hover:text-white transition-all duration-300 shadow-sm hover:shadow-md">
+                                <Link to={`/tutions/1`} className="w-full cursor-pointer py-2.5 rounded-lg border border-emerald-600 text-emerald-600 font-bold text-sm hover:bg-emerald-600 hover:text-white transition-all duration-300 shadow-sm hover:shadow-md">
                                     View Details
-                                </button>
+                                </Link>
                             </motion.div>
                         ))}
                     </div>

@@ -1,6 +1,5 @@
 import { motion } from "motion/react"
 const TuitionDetailsPage = () => {
-    // Mock Data for a single job
     const job = {
         id: "JOB-8921",
         title: "Need a Tutor for Class 9 Math & Physics",
@@ -165,25 +164,6 @@ const TuitionDetailsPage = () => {
                             </div>
                         </div>
 
-                        {/* 2. Similar Jobs */}
-                        <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
-                            <h3 className="font-bold text-gray-800 mb-4">Similar Jobs</h3>
-                            <div className="space-y-4">
-                                {similarJobs.map(job => (
-                                    <div key={job.id} className="group cursor-pointer">
-                                        <h4 className="text-sm font-semibold text-gray-700 group-hover:text-emerald-600 transition-colors">{job.title}</h4>
-                                        <div className="flex justify-between items-center mt-1">
-                                            <span className="text-xs text-gray-500">{job.location}</span>
-                                            <span className="text-xs font-bold text-emerald-600">{job.salary} BDT</span>
-                                        </div>
-                                        <div className="h-px bg-gray-50 mt-3 group-last:hidden"></div>
-                                    </div>
-                                ))}
-                            </div>
-                            <button className="w-full mt-4 text-xs font-bold text-emerald-600 hover:underline text-center">
-                                View All Similar Jobs
-                            </button>
-                        </div>
 
                     </div>
                 </div>
