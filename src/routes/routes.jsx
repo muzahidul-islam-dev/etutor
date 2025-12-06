@@ -5,6 +5,7 @@ import { Home } from "../pages/frontend/Home/Home";
 import Register from "../pages/frontend/Register/Register";
 import Login from "../pages/frontend/Login/Login";
 import TuitionsPage from "../pages/frontend/Tutions/TutionsPage";
+import TuitionDetailsPage from "../pages/frontend/TutionDetails/TutionDetails";
 
 const routes = createBrowserRouter([
     {
@@ -18,6 +19,10 @@ const routes = createBrowserRouter([
             {
                 path: '/tutions',
                 element: <TuitionsPage />
+            },
+            {
+                path: '/tutions/:id',
+                element: <TuitionDetailsPage />
             },
             {
                 path: 'user',
