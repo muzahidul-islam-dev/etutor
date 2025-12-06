@@ -1,4 +1,5 @@
 import { motion } from "motion/react"
+import { Link } from "react-router";
 const TuitionsPage = () => {
     // Mock Data
     const tuitionJobs = [
@@ -218,9 +219,9 @@ const TuitionsPage = () => {
                                             <span className="text-xs text-gray-400 whitespace-nowrap bg-gray-50 px-2 py-1 rounded">
                                                 {job.posted}
                                             </span>
-                                            <button className="bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold py-2 px-6 rounded-lg transition-all shadow-md shadow-emerald-100 hover:shadow-emerald-200 w-full md:w-auto">
+                                            <Link to={`/tutions/1`} className="bg-emerald-600 cursor-pointer hover:bg-emerald-700 text-white text-sm font-bold py-2 px-6 rounded-lg transition-all shadow-md shadow-emerald-100 hover:shadow-emerald-200 w-full md:w-auto">
                                                 View Details
-                                            </button>
+                                            </Link>
                                         </div>
                                     </div>
                                 </motion.div>

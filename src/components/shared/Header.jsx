@@ -62,13 +62,13 @@ export function Header() {
                         {/* 2. DESKTOP MENU (Hidden on Mobile) */}
                         <div className="hidden lg:flex items-center space-x-1">
                             {navLinks.map((link) => (
-                                <a 
+                                <Link 
                                     key={link.name}
-                                    href={link.href} 
+                                    to={link.href} 
                                     className="px-4 py-2 text-sm font-medium text-gray-600 rounded-lg hover:text-emerald-600 hover:bg-emerald-50 transition-colors"
                                 >
                                     {link.name}
-                                </a>
+                                </Link>
                             ))}
                         </div>
 
@@ -144,13 +144,13 @@ export function Header() {
                         <div className="lg:hidden mt-4 pb-4 border-t border-gray-100 animate-fade-in">
                             <div className="flex flex-col space-y-2 mt-4">
                                 {navLinks.map((link) => (
-                                    <a 
+                                    <Link 
                                         key={link.name}
-                                        href={link.href} 
+                                        to={link.href} 
                                         className="px-4 py-3 text-gray-600 hover:bg-emerald-50 hover:text-emerald-600 rounded-lg font-medium"
                                     >
                                         {link.name}
-                                    </a>
+                                    </Link>
                                 ))}
                                 
                                 <div className="border-t border-gray-100 my-2 pt-2">
