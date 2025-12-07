@@ -10,6 +10,8 @@ import TutorsPage from "../pages/frontend/Tutors/Tutors";
 import TutorProfilePage from "../pages/frontend/SingleTutor/SingleTutor";
 import ContactPage from "../pages/frontend/Contact/Contact";
 import AboutPage from "../pages/frontend/AboutUs/AboutUs";
+import { Studentlayout } from "../pages/dashboard/Student/Layout/StudentLayout";
+import MyTutions from "../pages/dashboard/Student/pages/MyTutions/MyTutions";
 
 const routes = createBrowserRouter([
     {
@@ -55,6 +57,16 @@ const routes = createBrowserRouter([
                     {
                         path: 'login',
                         element: <Login />
+                    },
+                    {
+                        path: 'student',
+                        element: <Studentlayout />,
+                        children: [
+                            {
+                                path: 'my-tution',
+                                element: <MyTutions />
+                            }
+                        ]
                     }
                 ]
             }
