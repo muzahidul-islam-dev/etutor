@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const MyTutions = ({ onPostClick }) => {
+const MyTutions = () => {
     const [activeTab, setActiveTab] = useState('All');
     const myPosts = [
         { id: 101, title: "Need Math Tutor for Class 9", subject: "Higher Math", location: "Dhanmondi, Dhaka", salary: "5,000 BDT", postedDate: "12 Oct, 2023", status: "Approved", applications: 12 },

@@ -12,6 +12,10 @@ import ContactPage from "../pages/frontend/Contact/Contact";
 import AboutPage from "../pages/frontend/AboutUs/AboutUs";
 import { Studentlayout } from "../pages/dashboard/Student/Layout/StudentLayout";
 import MyTutions from "../pages/dashboard/Student/pages/MyTutions/MyTutions";
+import PostNewTuition from "../pages/dashboard/Student/pages/PostNewTution/PostNewTution";
+import AppliedTutors from "../pages/dashboard/Student/pages/AppliedTutors/AppliedTutors";
+import PaymentHistory from "../pages/dashboard/Student/pages/Payment/PaymentHistory";
+import ProfileSettings from "../pages/dashboard/Student/pages/ProfileSettings/ProfileSettings";
 
 const routes = createBrowserRouter([
     {
@@ -57,7 +61,13 @@ const routes = createBrowserRouter([
                     {
                         path: 'login',
                         element: <Login />
-                    },
+                    }
+                ]
+            },
+            {
+                path: 'user',
+                element: <Outlet />,
+                children: [
                     {
                         path: 'student',
                         element: <Studentlayout />,
@@ -65,6 +75,22 @@ const routes = createBrowserRouter([
                             {
                                 path: 'my-tution',
                                 element: <MyTutions />
+                            },
+                            {
+                                path: 'post-new-tution',
+                                element: <PostNewTuition />
+                            },
+                            {
+                                path: 'applied-tutors',
+                                element: <AppliedTutors />
+                            },
+                            {
+                                path: 'payment-history',
+                                element: <PaymentHistory />
+                            },
+                            {
+                                path: 'profile-settings',
+                                element: <ProfileSettings />
                             }
                         ]
                     }
