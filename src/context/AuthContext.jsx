@@ -1,11 +1,11 @@
 import { createContext, useEffect, useState } from "react";
 import auth from "../config/firebase.config";
-import { createUserWithEmailAndPassword, onAuthStateChanged, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 
 export const AuthProvider = createContext();
 
 
-export default function AuthContext({children}){
+export default function AuthContext({ children }) {
     const [user, setUser] = useState(false);
     const [loading, setLoading] = useState(true)
 
@@ -16,8 +16,8 @@ export default function AuthContext({children}){
             setLoading(false)
         });
         return () => unsubscribe();
-    },[])
-    
+    }, [])
+
 
     const registerUser = async (fullName, email, password) => {
         try {
@@ -50,7 +50,7 @@ export default function AuthContext({children}){
                 message: 'Login Successfully',
                 resposne: result
             }
-            
+
         } catch (error) {
             return {
                 error: true,
@@ -60,11 +60,95 @@ export default function AuthContext({children}){
         }
     }
 
+
+    const loginWithGoogle = async () => {
+        try {
+            const provider = new GoogleAuthProvider();
+            const result = await signInWithPopup(auth, provider);
+            const user = result.user;
+            const photoURL = user.photoURL || user.providerData[0]?.photoURL || null;
+
+            if (!user.photoURL && photoURL) {
+                await updateProfile(user, { photoURL });
+            }
+            setUser(user);
+
+            return {
+                success: true,
+                message: 'Login Successfully',
+                response: result
+            }
+        } catch (error) {
+            console.log('login with google error', error);
+            return {
+                error: true,
+                message: error.message,
+                code: error.code
+            };
+        }
+    };
+
+    const profileUpdate = async (name, photoURL) => {
+
+        try {
+            const result = await updateProfile(user, {
+                displayName: name,
+                photoURL
+            })
+            setUser(user);
+            return {
+                success: true,
+                message: 'Profile update Successfully',
+                response: result
+            }
+        } catch (error) {
+            return {
+                error: true,
+                message: error.message,
+                code: error.code
+            }
+        }
+
+    }
+
+    const logout = async () => {
+        try {
+            await signOut(auth);
+            return {
+                success: true,
+                message: 'User Logout Successfully'
+            }
+        } catch (error) {
+            return {
+                error: true,
+                message: error.message,
+                code: error.code
+            }
+        }
+    }
+
+    const resetPassword = async (email) => {
+        try {
+            await sendPasswordResetEmail(auth, email);
+            return {
+                success: true,
+                message: 'Send reset password link on your email. please check'
+            }
+        } catch (error) {
+            return {
+                error: true,
+                message: error.message,
+                code: error.code
+            }
+        }
+    }
+
     const data = {
-        user, 
+        user,
         loading,
         registerUser,
-        loginUsingCredintial
+        loginUsingCredintial,
+        loginWithGoogle
     }
     return <AuthProvider.Provider value={data}>{children}</AuthProvider.Provider>
 }

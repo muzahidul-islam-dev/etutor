@@ -4,26 +4,42 @@ import { Link } from "react-router";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import useAuth from "../../../hook/useAuth";
+import Swal from "sweetalert2";
 const Login = () => {
     const [isLoading, setIsLoading] = useState(false);
     const { handleSubmit, register, formState: { errors } } = useForm();
-    const { loginUsingCredintial } = useAuth();
+    const { loginUsingCredintial, loginWithGoogle } = useAuth();
 
     const onSubmit = async (data) => {
 
         try {
             setIsLoading(true);
             const result = await loginUsingCredintial(data?.email, data?.password)
-            console.log(result, 'user login')
+            if(result?.success){
+                Swal.fire('Success', 'Login Successfully', 'success')
+            }else{
+                if(result?.code == 'auth/invalid-credential'){
+                    Swal.fire('Error', 'Credintial not matched', 'error')
+                }else{
+                    Swal.fire('Error', result?.code, 'error')
+                }
+            }
+            setIsLoading(false)
         } catch (error) {
+            setIsLoading(false)
             console.log(error, 'login catch error')
         }
 
     };
 
-    const handleGoogleLogin = () => {
-        // Handle Google Login Logic
-        console.log("Logging in with Google...");
+    const handleGoogleLogin = async () => {
+        const data = await loginWithGoogle();
+        if(data?.success){
+            Swal.fire('Success', 'Login Successfully', 'success')
+            
+        }else{
+            Swal.fire('Error', data?.code, 'error')
+        }
     };
 
     return (
@@ -82,7 +98,7 @@ const Login = () => {
 
                         <button
                             onClick={handleGoogleLogin}
-                            className="w-full flex items-center justify-center gap-3 bg-white border border-gray-300 text-gray-700 font-semibold py-3 rounded-lg hover:bg-gray-50 transition-colors mb-6 shadow-sm"
+                            className="w-full cursor-pointer flex items-center justify-center gap-3 bg-white border border-gray-300 text-gray-700 font-semibold py-3 rounded-lg hover:bg-gray-50 transition-colors mb-6 shadow-sm"
                         >
                             <svg className="w-5 h-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
@@ -134,7 +150,7 @@ const Login = () => {
                             <button
                                 type="submit"
                                 disabled={isLoading}
-                                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-lg shadow-lg shadow-emerald-200 hover:shadow-emerald-300 transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
+                                className="w-full cursor-pointer bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-lg shadow-lg shadow-emerald-200 hover:shadow-emerald-300 transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
                             >
                                 {isLoading ? (
                                     <>

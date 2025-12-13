@@ -24,6 +24,8 @@ import { Adminlayout } from "../pages/dashboard/Admin/Layout/AdminLayout";
 import UserManagement from "../pages/dashboard/Admin/pages/Users/UserManagement";
 import TuitionManagement from "../pages/dashboard/Admin/pages/TutionManagement/TutionManagement";
 import ReportAnalysis from "../pages/dashboard/Admin/pages/ReportAnalysis/ReportAnalysis";
+import { Privateroutes } from "./PrivateRoutes";
+import { Authlayout } from "../components/shared/AuthLayout";
 
 const routes = createBrowserRouter([
     {
@@ -60,7 +62,7 @@ const routes = createBrowserRouter([
             },
             {
                 path: 'user',
-                element: <Outlet />,
+                element: <Authlayout />,
                 children: [
                     {
                         path: 'register',
@@ -74,7 +76,7 @@ const routes = createBrowserRouter([
             },
             {
                 path: 'user',
-                element: <Outlet />,
+                element: <Privateroutes><Outlet /></Privateroutes>,
                 children: [
                     {
                         path: 'student',
