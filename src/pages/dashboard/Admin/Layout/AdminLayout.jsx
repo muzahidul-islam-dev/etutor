@@ -1,14 +1,13 @@
 import { Outlet } from "react-router";
-import TutorSidebar from "./TutorSidebar";
+import { AdminSidebar } from "./AdminSidebar";
 
-export function Tutorlayout() {
+export function Adminlayout() {
     return (
         <div className="flex flex-1 container mx-auto px-0 md:px-6 pt-24 pb-12">
-            <TutorSidebar />
+            <AdminSidebar />
             <div className="flex-1 p-4 md:p-8">
                 <Outlet />
             </div>
-
         </div>
     );
 }

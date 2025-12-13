@@ -1,15 +1,22 @@
 import { motion } from "motion/react"
 import { useState } from "react";
 import { Link } from "react-router";
+import useAuth from "../../../hook/useAuth";
+import { useForm } from "react-hook-form";
 const Register = () => {
-    const [role, setRole] = useState('student'); // 'student' | 'tutor'
+    const {registerUser} = useAuth();
+    const [role, setRole] = useState('student');
     const [isLoading, setIsLoading] = useState(false);
+    const {handleSubmit, register, formState: {errors}}  = useForm();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const onSubmit = async (data) => {
         setIsLoading(true);
-        // Simulate API call
-        setTimeout(() => setIsLoading(false), 2000);
+        console.log(data, 'user submit data')
+        const result = await registerUser(data?.name, data?.email, data?.password);
+        if(result.success){
+            setIsLoading(false)
+        }
+
     };
 
     return (
@@ -105,7 +112,7 @@ const Register = () => {
                         </div>
 
                         
-                        <form className="space-y-5" onSubmit={handleSubmit}>
+                        <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
                             
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
@@ -113,7 +120,8 @@ const Register = () => {
                                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                         <svg className="h-5 w-5 text-gray-400 group-focus-within:text-emerald-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
                                     </div>
-                                    <input type="text" className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all bg-gray-50 focus:bg-white" placeholder="Enter your full name" required />
+                                    <input {...register('name', {required: true})} type="text" className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all bg-gray-50 focus:bg-white" placeholder="Enter your full name" />
+                                    {errors?.name && <label htmlFor="" className="text-red-500">{errors?.name?.message}</label>}
                                 </div>
                             </div>
 
@@ -124,7 +132,8 @@ const Register = () => {
                                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                         <svg className="h-5 w-5 text-gray-400 group-focus-within:text-emerald-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
                                     </div>
-                                    <input type="tel" className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all bg-gray-50 focus:bg-white" placeholder="017xxxxxxxx" required />
+                                    <input {...register('number', {required: true})} type="tel" className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all bg-gray-50 focus:bg-white" placeholder="017xxxxxxxx" />
+                                    {errors?.number && <label htmlFor="" className="text-red-500">{errors?.number?.message}</label>}
                                 </div>
                             </div>
 
@@ -135,7 +144,8 @@ const Register = () => {
                                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                         <svg className="h-5 w-5 text-gray-400 group-focus-within:text-emerald-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" /></svg>
                                     </div>
-                                    <input type="email" className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all bg-gray-50 focus:bg-white" placeholder="you@example.com" required />
+                                    <input type="email" {...register('email', {required: true})} className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all bg-gray-50 focus:bg-white" placeholder="you@example.com" />
+                                    {errors?.email && <label htmlFor="" className="text-red-500">{errors?.email?.message}</label>}
                                 </div>
                             </div>
 
@@ -146,15 +156,14 @@ const Register = () => {
                                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                         <svg className="h-5 w-5 text-gray-400 group-focus-within:text-emerald-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
                                     </div>
-                                    <input type="password" className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all bg-gray-50 focus:bg-white" placeholder="••••••••" required />
+                                    <input type="password" {...register('password', {required: true})} className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all bg-gray-50 focus:bg-white" placeholder="••••••••" />
+                                    {errors?.password && <label htmlFor="" className="text-red-500">{errors?.password?.message}</label>}
                                 </div>
                             </div>
-
-                            
                             <button 
                                 type="submit"
                                 disabled={isLoading}
-                                className={`w-full font-bold py-3 rounded-lg shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center gap-2 ${
+                                className={`w-full cursor-pointer font-bold py-3 rounded-lg shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center gap-2 ${
                                     role === 'student' 
                                     ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-200' 
                                     : 'bg-orange-500 hover:bg-orange-600 text-white shadow-orange-200'

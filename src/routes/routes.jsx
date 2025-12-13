@@ -16,6 +16,14 @@ import PostNewTuition from "../pages/dashboard/Student/pages/PostNewTution/PostN
 import AppliedTutors from "../pages/dashboard/Student/pages/AppliedTutors/AppliedTutors";
 import PaymentHistory from "../pages/dashboard/Student/pages/Payment/PaymentHistory";
 import ProfileSettings from "../pages/dashboard/Student/pages/ProfileSettings/ProfileSettings";
+import { Tutorlayout } from "../pages/dashboard/Tutor/Layout/TutorLayout";
+import MyApplication from "../pages/dashboard/Tutor/pages/MyApplication/MyApplication";
+import OngoingTuition from "../pages/dashboard/Tutor/pages/OngoingTution/OngoingTution";
+import RevenueHistory from "../pages/dashboard/Tutor/pages/RevenueHistory/RevenueHistory";
+import { Adminlayout } from "../pages/dashboard/Admin/Layout/AdminLayout";
+import UserManagement from "../pages/dashboard/Admin/pages/Users/UserManagement";
+import TuitionManagement from "../pages/dashboard/Admin/pages/TutionManagement/TutionManagement";
+import ReportAnalysis from "../pages/dashboard/Admin/pages/ReportAnalysis/ReportAnalysis";
 
 const routes = createBrowserRouter([
     {
@@ -91,6 +99,42 @@ const routes = createBrowserRouter([
                             {
                                 path: 'profile-settings',
                                 element: <ProfileSettings />
+                            }
+                        ]
+                    },
+                    {
+                        path: 'tutor',
+                        element: <Tutorlayout />,
+                        children: [
+                            {
+                                path: 'my-application',
+                                element: <MyApplication />
+                            },
+                            {
+                                path: 'on-going-tution',
+                                element: <OngoingTuition />
+                            },
+                            {
+                                path: 'revenue-history',
+                                element: <RevenueHistory />
+                            }
+                        ]
+                    },
+                    {
+                        path: 'admin',
+                        element: <Adminlayout />,
+                        children: [
+                            {
+                                path: 'users',
+                                element: <UserManagement />
+                            },
+                            {
+                                path: 'tuition-management',
+                                element: <TuitionManagement />
+                            },
+                            {
+                                path: 'report-analysis',
+                                element: <ReportAnalysis />
                             }
                         ]
                     }
