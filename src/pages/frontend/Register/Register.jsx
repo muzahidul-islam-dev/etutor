@@ -5,11 +5,13 @@ import useAuth from "../../../hook/useAuth";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Swal from "sweetalert2";
+import useSecureAxios from "../../../hook/useSecureAxios";
 const Register = () => {
     const { registerUser } = useAuth();
     const [role, setRole] = useState('student');
     const [isLoading, setIsLoading] = useState(false);
     const { handleSubmit, register, formState: { errors } } = useForm();
+    const secureApi = useSecureAxios();
 
     const onSubmit = async (data) => {
         try {
@@ -23,7 +25,7 @@ const Register = () => {
 
             const result = await registerUser(data?.name, data?.email, data?.password);
             if (result.success) {
-                axios.post('/api/user/register', userData).then(response => {
+                secureApi.post('/api/user/register', userData).then(response => {
                     if(response?.data?.success){
                         Swal.fire('Success', 'Registration successfully', 'success')
                     }else{

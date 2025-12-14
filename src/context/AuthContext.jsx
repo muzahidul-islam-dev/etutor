@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import auth from "../config/firebase.config";
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import useSecureAxios from "../hook/useSecureAxios";
 
 export const AuthProvider = createContext();
 
@@ -8,6 +9,8 @@ export const AuthProvider = createContext();
 export default function AuthContext({ children }) {
     const [user, setUser] = useState(false);
     const [loading, setLoading] = useState(true)
+
+    const secureAxios = useSecureAxios();
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -143,12 +146,19 @@ export default function AuthContext({ children }) {
         }
     }
 
+    const checkRole = async () => {
+        secureAxios.get('/api/user/role-check').then(response => {
+            console.log(response, 'this is check role')
+        })
+    }
+
     const data = {
         user,
         loading,
         registerUser,
         loginUsingCredintial,
-        loginWithGoogle
+        loginWithGoogle,
+        checkRole
     }
     return <AuthProvider.Provider value={data}>{children}</AuthProvider.Provider>
 }

@@ -1,19 +1,25 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
+import useAuth from "../../hook/useAuth";
 
 export function Header() {
+    const {user, loading: userLoading, checkRole} = useAuth();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        setIsLoggedIn(user ? true : false)
+        checkRole()
+    },[user, userLoading])
     
-    // State for Mobile Menu
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     
-    // State for Profile Dropdown
+    
     const [isProfileOpen, setIsProfileOpen] = useState(false);
 
-    // State for Sticky Navbar Shadow
+    
     const [isScrolled, setIsScrolled] = useState(false);
 
-    // Click outside to close dropdowns
+    
     const profileRef = useRef(null);
 
     useEffect(() => {
@@ -43,6 +49,7 @@ export function Header() {
         { name: 'About', href: '/about' },
         { name: 'Contact', href: '/contact' },
     ];
+    if(userLoading) return ''
     return (
         <div>
             <nav 
@@ -76,15 +83,15 @@ export function Header() {
                         <div className="hidden lg:flex items-center gap-3">
                             {isLoggedIn ? (
                                 <>
-                                    <a href="#" className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-emerald-600">
+                                    <Link to="/user/student/my-tution" className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-emerald-600">
                                         Dashboard
-                                    </a>
+                                    </Link>
                                     
                                     
                                     <div className="relative" ref={profileRef}>
                                         <button 
                                             onClick={() => setIsProfileOpen(!isProfileOpen)}
-                                            className="flex items-center gap-2 focus:outline-none"
+                                            className="flex cursor-pointer items-center gap-2 focus:outline-none"
                                         >
                                             <div className="h-10 w-10 rounded-full bg-emerald-100 border-2 border-emerald-500 p-0.5 overflow-hidden">
                                                 <img 
@@ -99,8 +106,8 @@ export function Header() {
                                         {isProfileOpen && (
                                             <div className="absolute right-0 mt-3 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2 overflow-hidden animate-fade-in-down">
                                                 <div className="px-4 py-3 border-b border-gray-50 bg-gray-50/50">
-                                                    <p className="text-sm font-bold text-gray-800">Muzahidul Islam</p>
-                                                    <p className="text-xs text-gray-500">muzahidul@example.com</p>
+                                                    <p className="text-sm font-bold text-gray-800">{user?.displayName}</p>
+                                                    <p className="text-xs text-gray-500">{user?.email }</p>
                                                 </div>
                                                 <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50 hover:text-emerald-600">Profile</a>
                                                 <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50 hover:text-emerald-600">Settings</a>
