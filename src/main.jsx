@@ -4,8 +4,9 @@ import './index.css'
 import App from './App.jsx'
 import { RouterProvider } from 'react-router'
 import routes from './routes/routes.jsx'
-import AuthContext from './context/AuthContext.jsx'
 import axios from 'axios'
+import AuthProvider from './context/AuthContext.jsx'
+
 // axios.defaults.baseURL = import.meta.env.VITE_API_URL
 // axios.interceptors.request.use(function(config){
 //   config.headers.Authorization = `Bearer ${}`
@@ -13,8 +14,8 @@ import axios from 'axios'
 // })
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthContext>
+    <AuthProvider>
       <RouterProvider router={routes}></RouterProvider>
-    </AuthContext>
+    </AuthProvider>
   </StrictMode>,
 )

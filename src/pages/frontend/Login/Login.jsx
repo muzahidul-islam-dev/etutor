@@ -5,22 +5,25 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import useAuth from "../../../hook/useAuth";
 import Swal from "sweetalert2";
+import useSecureAxios from "../../../hook/useSecureAxios";
 const Login = () => {
     const [isLoading, setIsLoading] = useState(false);
     const { handleSubmit, register, formState: { errors } } = useForm();
     const { loginUsingCredintial, loginWithGoogle } = useAuth();
+
+    const { secureAxios } = useSecureAxios();
 
     const onSubmit = async (data) => {
 
         try {
             setIsLoading(true);
             const result = await loginUsingCredintial(data?.email, data?.password)
-            if(result?.success){
+            if (result?.success) {
                 Swal.fire('Success', 'Login Successfully', 'success')
-            }else{
-                if(result?.code == 'auth/invalid-credential'){
+            } else {
+                if (result?.code == 'auth/invalid-credential') {
                     Swal.fire('Error', 'Credintial not matched', 'error')
-                }else{
+                } else {
                     Swal.fire('Error', result?.code, 'error')
                 }
             }
@@ -33,14 +36,27 @@ const Login = () => {
     };
 
     const handleGoogleLogin = async () => {
-        const data = await loginWithGoogle();
-        if(data?.success){
-            Swal.fire('Success', 'Login Successfully', 'success')
-            
-        }else{
-            Swal.fire('Error', data?.code, 'error')
+        try {
+            const data = await loginWithGoogle();
+            if (data?.success) {
+                Swal.fire('Success', 'Login Successfully', 'success')
+                const userData = {
+                    name: data?.response?.user?.displayName,
+                    email: data?.response?.user?.email,
+                    role: 'student'
+                }
+                secureAxios.post('/api/user/login', userData).then(response => {
+                    console.log(response)
+                })
+            } else {
+                Swal.fire('Error', data?.code, 'error')
+            }
+        } catch (error) {
+            console.log(error)
         }
     };
+
+
 
     return (
         <div className="min-h-screen pt-24 pb-12 px-4 flex items-center justify-center bg-gray-50">

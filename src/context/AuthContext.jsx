@@ -1,26 +1,40 @@
 import { createContext, useEffect, useState } from "react";
 import auth from "../config/firebase.config";
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
-import useSecureAxios from "../hook/useSecureAxios";
+import axios from "axios";
 
-export const AuthProvider = createContext();
+export const AuthContext = createContext();
 
 
-export default function AuthContext({ children }) {
-    const [user, setUser] = useState(false);
+export default function AuthProvider({ children }) {
+    const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true)
+    const [userRole, setUserRole] = useState(null);
 
-    const secureAxios = useSecureAxios();
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            console.log(currentUser, 'current user')
             setUser(currentUser)
             setLoading(false)
         });
         return () => unsubscribe();
     }, [])
 
+    useEffect(() => {
+        if(user){
+            axios.get(`${import.meta.env.VITE_API_URL}/api/user/role-check`, {
+            headers: {
+                Authorization: `Bearer ${user?.accessToken}`
+            }
+        }).then(response => {
+            if (response?.data?.success) {
+                setUserRole(response?.data?.data?.role ?? 'user')
+            } else {
+                setUserRole(null)
+            }
+        })
+        }
+    }, [user])
 
     const registerUser = async (fullName, email, password) => {
         try {
@@ -91,6 +105,23 @@ export default function AuthContext({ children }) {
         }
     };
 
+    const checkRole = async () => {
+        if (!user?.accessToken) return null;
+
+        try {
+            const res = await axios.get('http://localhost:3000/api/user/role-check', {
+                headers: {
+                    Authorization: `Bearer ${user.accessToken}`
+                }
+            });
+            const data = await res.data;
+            return data;
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
+    };
+
     const profileUpdate = async (name, photoURL) => {
 
         try {
@@ -146,11 +177,6 @@ export default function AuthContext({ children }) {
         }
     }
 
-    const checkRole = async () => {
-        secureAxios.get('/api/user/role-check').then(response => {
-            console.log(response, 'this is check role')
-        })
-    }
 
     const data = {
         user,
@@ -158,7 +184,9 @@ export default function AuthContext({ children }) {
         registerUser,
         loginUsingCredintial,
         loginWithGoogle,
-        checkRole
+        checkRole,
+        logout,
+        userRole
     }
-    return <AuthProvider.Provider value={data}>{children}</AuthProvider.Provider>
+    return <AuthContext.Provider value={data}>{children}</AuthContext.Provider>
 }
