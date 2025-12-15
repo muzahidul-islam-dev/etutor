@@ -10,6 +10,7 @@ export default function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true)
     const [userRole, setUserRole] = useState(null);
+    const [userRoleLoading, setUserRoleLoading] = useState(true)
 
 
     useEffect(() => {
@@ -21,18 +22,21 @@ export default function AuthProvider({ children }) {
     }, [])
 
     useEffect(() => {
-        if(user){
+        if (user) {
             axios.get(`${import.meta.env.VITE_API_URL}/api/user/role-check`, {
-            headers: {
-                Authorization: `Bearer ${user?.accessToken}`
-            }
-        }).then(response => {
-            if (response?.data?.success) {
-                setUserRole(response?.data?.data?.role ?? 'user')
-            } else {
-                setUserRole(null)
-            }
-        })
+                headers: {
+                    Authorization: `Bearer ${user?.accessToken}`
+                }
+            }).then(response => {
+                if (response?.data?.success) {
+                    setUserRole(response?.data?.data?.role ?? 'user')
+                } else {
+                    setUserRole(null)
+                }
+                setUserRoleLoading(false)
+            }).catch(error => {
+                setUserRoleLoading(false)
+            })
         }
     }, [user])
 
@@ -186,7 +190,8 @@ export default function AuthProvider({ children }) {
         loginWithGoogle,
         checkRole,
         logout,
-        userRole
+        userRole,
+        userRoleLoading
     }
     return <AuthContext.Provider value={data}>{children}</AuthContext.Provider>
 }

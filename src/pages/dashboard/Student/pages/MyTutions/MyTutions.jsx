@@ -1,15 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
+import { Loading } from "../../../../../components/utils/Loading";
+import useSecureAxios from "../../../../../hook/useSecureAxios";
 
 const MyTutions = () => {
     const [activeTab, setActiveTab] = useState('All');
+    const [tutions, setTutions] = useState([]);
+    const [loading, setLoading] = useState(true)
+    const {secureAxios} = useSecureAxios();
+    useEffect(() => {
+        secureAxios.get('/api/student/tuition/all').then(response => {
+            console.log(response)
+            setLoading(false)
+        })
+    }, []);
     const myPosts = [
         { id: 101, title: "Need Math Tutor for Class 9", subject: "Higher Math", location: "Dhanmondi, Dhaka", salary: "5,000 BDT", postedDate: "12 Oct, 2023", status: "Approved", applications: 12 },
         { id: 102, title: "English Version Science Tutor", subject: "Physics & Chemistry", location: "Mirpur 10", salary: "6,500 BDT", postedDate: "10 Oct, 2023", status: "Pending", applications: 0 },
         { id: 103, title: "Class 5 All Subjects", subject: "All Subjects", location: "Uttara", salary: "4,000 BDT", postedDate: "01 Sep, 2023", status: "Completed", applications: 25 },
     ];
     const filteredPosts = activeTab === 'All' ? myPosts : myPosts.filter(post => post.status === activeTab);
-
+    if(loading) return <Loading />
     return (
         <div className="space-y-6">
             <div className="flex justify-between items-center">
