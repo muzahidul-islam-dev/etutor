@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import useSecureAxios from "../../../../../hook/useSecureAxios";
-import useAuth from "../../../../../hook/useAuth";
 
 const PostNewTuition = () => {
     const {handleSubmit, register, reset, formState: {errors}} = useForm();
@@ -28,7 +27,7 @@ const PostNewTuition = () => {
             
             if(response?.data?.success) {
                 Swal.fire('Success', 'Tuition posted successfully!', 'success');
-                reset(); // Reset form after successful submission
+                reset();
             } else {
                 Swal.fire('Error', response?.data?.message || 'Failed to post tuition', 'error');
             }

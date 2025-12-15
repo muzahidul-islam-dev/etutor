@@ -7,20 +7,35 @@ const MyTutions = () => {
     const [activeTab, setActiveTab] = useState('All');
     const [tutions, setTutions] = useState([]);
     const [loading, setLoading] = useState(true)
-    const {secureAxios} = useSecureAxios();
+    const { secureAxios } = useSecureAxios();
     useEffect(() => {
         secureAxios.get('/api/student/tuition/all').then(response => {
-            console.log(response)
+            if (response?.data?.success) {
+                setTutions(response?.data?.data)
+            }
             setLoading(false)
         })
     }, []);
-    const myPosts = [
-        { id: 101, title: "Need Math Tutor for Class 9", subject: "Higher Math", location: "Dhanmondi, Dhaka", salary: "5,000 BDT", postedDate: "12 Oct, 2023", status: "Approved", applications: 12 },
-        { id: 102, title: "English Version Science Tutor", subject: "Physics & Chemistry", location: "Mirpur 10", salary: "6,500 BDT", postedDate: "10 Oct, 2023", status: "Pending", applications: 0 },
-        { id: 103, title: "Class 5 All Subjects", subject: "All Subjects", location: "Uttara", salary: "4,000 BDT", postedDate: "01 Sep, 2023", status: "Completed", applications: 25 },
-    ];
+    if (loading) return <Loading />
+
+
+
+    const myPosts = tutions?.map((item) => ({
+        id: item._id,
+        title: item.title,
+        subject: item.subject,
+        location: item.location,
+        salary: item.salary,
+        postedDate: item.postedDate,
+        status: item.status,
+        applications: item.applications
+    }));
+
+
+    console.log(tutions, 'this is tutions')
     const filteredPosts = activeTab === 'All' ? myPosts : myPosts.filter(post => post.status === activeTab);
-    if(loading) return <Loading />
+
+
     return (
         <div className="space-y-6">
             <div className="flex justify-between items-center">
@@ -30,7 +45,7 @@ const MyTutions = () => {
                 </Link>
             </div>
             <div className="flex border-b border-gray-200 mb-6 gap-6">
-                {['All', 'Approved', 'Pending', 'Completed'].map((tab) => (
+                {['All', 'approved', 'pending', 'completed', 'rejected'].map((tab) => (
                     <button key={tab} onClick={() => setActiveTab(tab)} className={`pb-2 cursor-pointer text-sm font-medium transition-colors border-b-2 ${activeTab === tab ? 'border-emerald-600 text-emerald-600' : 'border-transparent text-gray-500 hover:text-gray-700'}`}>{tab}</button>
                 ))}
             </div>
@@ -40,7 +55,7 @@ const MyTutions = () => {
                         <div className="flex flex-col md:flex-row justify-between gap-4">
                             <div>
                                 <div className="flex items-center gap-3 mb-2">
-                                    <span className={`text-xs font-bold px-2 py-1 rounded uppercase tracking-wide ${post.status === 'Approved' ? 'bg-emerald-50 text-emerald-600' : post.status === 'Pending' ? 'bg-yellow-50 text-yellow-600' : 'bg-gray-100 text-gray-500'}`}>{post.status}</span>
+                                    <span className={`text-xs font-bold px-2 py-1 rounded uppercase tracking-wide ${post.status === 'approved' ? 'bg-emerald-50 text-emerald-600' : post.status === 'pending' ? 'bg-yellow-50 text-yellow-600' : 'bg-gray-100 text-gray-500'}`}>{post.status}</span>
                                     <span className="text-xs text-gray-400">{post.postedDate}</span>
                                 </div>
                                 <h3 className="text-lg font-bold text-gray-800">{post.title}</h3>

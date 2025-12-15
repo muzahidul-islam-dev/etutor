@@ -7,7 +7,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import useSecureAxios from "../../../hook/useSecureAxios";
 const Register = () => {
-    const { registerUser } = useAuth();
+    const { registerUser, setUser, setUserRole } = useAuth();
     const [role, setRole] = useState('student');
     const [isLoading, setIsLoading] = useState(false);
     const { handleSubmit, register, formState: { errors } } = useForm();
@@ -29,6 +29,9 @@ const Register = () => {
                 secureAxios.post('/api/user/register', userData).then(response => {
                     if(response?.data?.success){
                         Swal.fire('Success', 'Registration successfully', 'success')
+                        console.log(result?.resposne?.user, 'this is user information')
+                        setUser(result?.resposne?.user)
+                        setUserRole(role)
                     }else{
                         Swal.fire('Error', response?.data?.message, 'error')
                     }

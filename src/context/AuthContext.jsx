@@ -191,7 +191,9 @@ export default function AuthProvider({ children }) {
         checkRole,
         logout,
         userRole,
-        userRoleLoading
+        userRoleLoading,
+        setUser,
+        setUserRole
     }
     return <AuthContext.Provider value={data}>{children}</AuthContext.Provider>
 }
