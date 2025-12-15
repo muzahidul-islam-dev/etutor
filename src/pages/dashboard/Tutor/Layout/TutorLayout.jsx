@@ -1,7 +1,11 @@
 import { Outlet } from "react-router";
 import TutorSidebar from "./TutorSidebar";
+import useAuth from "../../../../hook/useAuth";
+import Unauthorized from "../../Forbidden/Unauthorized";
 
 export function Tutorlayout() {
+    const {userRole} = useAuth();
+    if(userRole != 'tutor') return <Unauthorized />
     return (
         <div className="flex flex-1 container mx-auto px-0 md:px-6 pt-24 pb-12">
             <TutorSidebar />
