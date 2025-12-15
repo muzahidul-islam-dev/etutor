@@ -65,7 +65,7 @@ export function Header() {
     const dashboardRoute = {
         student: { label: "Dashboard", to: "/user/student/my-tution" },
         tutor: { label: "My Application", to: "/user/tutor/my-application" },
-        admin: { label: "Dashboard", to: "/admin/dashboard" },
+        admin: { label: "Dashboard", to: "/user/admin/report-analysis" },
     };
 
     console.log(userRole)
