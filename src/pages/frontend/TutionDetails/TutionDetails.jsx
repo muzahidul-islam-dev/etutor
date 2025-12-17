@@ -1,25 +1,47 @@
 import { motion } from "motion/react"
+import { useEffect, useState } from "react";
+import useSecureAxios from "../../../hook/useSecureAxios";
+import { useNavigate, useParams } from "react-router";
+import Swal from "sweetalert2";
+import { Loading } from "../../../components/utils/Loading";
 const TuitionDetailsPage = () => {
+    const [tuition, setTuition] = useState({});
+    const { secureAxios } = useSecureAxios();
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(true)
+    const { id } = useParams();
+    useEffect(() => {
+        secureAxios.get(`/api/tution/list/${id}`).then(response => {
+            if (response?.data?.success) {
+                setTuition(response?.data?.data)
+                setLoading(false)
+            } else {
+                Swal.fire('Error', response?.data?.message, 'error')
+                navigate('/tutions', {
+                    replace: true
+                })
+            }
+        }).catch(error => {
+            console.log(error)
+            setLoading(false)
+            Swal.fire('Error', error?.response?.data?.message, 'error')
+            navigate('/tutions', {
+                replace: true
+            })
+        })
+    }, [id])
     const job = {
-        id: "JOB-8921",
-        title: "Need a Tutor for Class 9 Math & Physics",
-        posted_date: "12 Oct, 2023",
-        posted_time: "2 hours ago",
+        title: tuition?.title,
+        posted_date: tuition?.createdAt ? new Date(tuition.createdAt).toLocaleDateString('en-BD') : null,
         status: "Active",
-        location: "Dhanmondi Road 27, Dhaka",
-        salary: "6,000 BDT",
-        negotiable: true,
+        location: tuition?.location,
+        salary: tuition?.salary,
         details: {
-            medium: "Bangla Medium",
-            class: "Class 9",
-            student_gender: "Male",
-            tutor_gender_pref: "Male",
-            days_per_week: "3 Days/Week",
-            subjects: ["General Math", "Higher Math", "Physics"],
-            tutoring_time: "7:00 PM - 9:00 PM",
-            institute: "Dhanmondi Govt. Boys High School"
+            class: tuition?.className,
+            days_per_week: tuition?.per_week,
+            subjects: tuition?.subject?.split(','),
         },
-        description: "Looking for an experienced tutor from a public university (BUET/DU/DMC preferred). The student is weak in Higher Math geometry and needs extra care. Tutors living near Dhanmondi will get priority."
+        description: tuition?.description
     };
 
     const similarJobs = [
@@ -28,11 +50,13 @@ const TuitionDetailsPage = () => {
         { id: 4, title: "English Version Class 5", location: "Jigatola", salary: "5000" },
     ];
 
+    if (loading) return <Loading />
+
     return (
         <div className="min-h-screen bg-gray-50 pt-28 pb-12">
             <div className="container mx-auto px-4 md:px-6">
-                
-                
+
+
                 <div className="text-sm text-gray-500 mb-6 flex items-center gap-2">
                     <a href="#" className="hover:text-emerald-600">Home</a>
                     <svg className="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
@@ -42,11 +66,11 @@ const TuitionDetailsPage = () => {
                 </div>
 
                 <div className="flex flex-col lg:flex-row gap-8">
-                    
-                    
+
+
                     <div className="w-full lg:w-2/3">
-                        
-                        
+
+
                         <div className="bg-white rounded-xl p-6 md:p-8 border border-gray-100 shadow-sm mb-6">
                             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
                                 <h1 className="text-2xl md:text-3xl font-bold text-gray-800 leading-tight">
@@ -56,12 +80,8 @@ const TuitionDetailsPage = () => {
                                     {job.status}
                                 </span>
                             </div>
-                            
+
                             <div className="flex flex-wrap items-center gap-y-2 gap-x-6 text-sm text-gray-500 border-b border-gray-100 pb-6 mb-6">
-                                <span className="flex items-center gap-1.5">
-                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" /></svg>
-                                    Job ID: <span className="font-semibold text-gray-700">{job.id}</span>
-                                </span>
                                 <span className="flex items-center gap-1.5">
                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                                     Posted: {job.posted_date}
@@ -72,35 +92,19 @@ const TuitionDetailsPage = () => {
                                 </span>
                             </div>
 
-                            
+
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-8">
-                                <div className="space-y-1">
-                                    <p className="text-xs text-gray-400 uppercase font-semibold">Medium</p>
-                                    <p className="text-gray-800 font-medium">{job.details.medium}</p>
-                                </div>
                                 <div className="space-y-1">
                                     <p className="text-xs text-gray-400 uppercase font-semibold">Class</p>
                                     <p className="text-gray-800 font-medium">{job.details.class}</p>
                                 </div>
                                 <div className="space-y-1">
-                                    <p className="text-xs text-gray-400 uppercase font-semibold">Student Gender</p>
-                                    <p className="text-gray-800 font-medium">{job.details.student_gender}</p>
-                                </div>
-                                <div className="space-y-1">
-                                    <p className="text-xs text-gray-400 uppercase font-semibold">Tutor Preference</p>
-                                    <p className="text-emerald-600 font-bold">{job.details.tutor_gender_pref}</p>
-                                </div>
-                                <div className="space-y-1">
                                     <p className="text-xs text-gray-400 uppercase font-semibold">Days Per Week</p>
                                     <p className="text-gray-800 font-medium">{job.details.days_per_week}</p>
                                 </div>
-                                <div className="space-y-1">
-                                    <p className="text-xs text-gray-400 uppercase font-semibold">Tutoring Time</p>
-                                    <p className="text-gray-800 font-medium">{job.details.tutoring_time}</p>
-                                </div>
                             </div>
 
-                            
+
                             <div className="mt-8 pt-6 border-t border-gray-100">
                                 <p className="text-xs text-gray-400 uppercase font-semibold mb-3">Subjects</p>
                                 <div className="flex flex-wrap gap-2">
@@ -113,7 +117,7 @@ const TuitionDetailsPage = () => {
                             </div>
                         </div>
 
-                        
+
                         <div className="bg-white rounded-xl p-6 md:p-8 border border-gray-100 shadow-sm mb-6">
                             <h3 className="text-lg font-bold text-gray-800 mb-4 border-l-4 border-emerald-500 pl-3">
                                 Requirement Details
@@ -121,7 +125,7 @@ const TuitionDetailsPage = () => {
                             <p className="text-gray-600 leading-relaxed whitespace-pre-line">
                                 {job.description}
                             </p>
-                            
+
                             <div className="mt-6 p-4 bg-yellow-50 border border-yellow-100 rounded-lg">
                                 <h4 className="text-sm font-bold text-yellow-800 mb-2 flex items-center gap-2">
                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
@@ -135,23 +139,18 @@ const TuitionDetailsPage = () => {
 
                     </div>
 
-                    
+
                     <div className="w-full lg:w-1/3 space-y-6">
-                        
-                        
+
+
                         <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-lg sticky top-28">
                             <div className="text-center mb-6">
                                 <p className="text-sm text-gray-500 mb-1">Salary</p>
-                                <h2 className="text-3xl font-extrabold text-emerald-600">{job.salary}</h2>
-                                {job.negotiable && <span className="text-xs text-gray-400">(Negotiable)</span>}
+                                <h2 className="text-3xl font-extrabold text-emerald-600">{job.salary} BDT</h2>
                             </div>
 
-                            <button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl shadow-md shadow-emerald-200 hover:shadow-emerald-300 transition-all transform hover:-translate-y-0.5 mb-3">
+                            <button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl shadow-md shadow-emerald-200 hover:shadow-emerald-300 transition-all transform hover:-translate-y-0.5 mb-3 cursor-pointer">
                                 Apply Now
-                            </button>
-                            <button className="w-full bg-white border border-gray-200 hover:border-emerald-500 text-gray-600 hover:text-emerald-600 font-semibold py-3 rounded-xl transition-all flex items-center justify-center gap-2">
-                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
-                                Save Job
                             </button>
 
                             <div className="mt-6 pt-6 border-t border-gray-100">
