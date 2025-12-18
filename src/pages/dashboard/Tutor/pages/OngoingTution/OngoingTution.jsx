@@ -1,7 +1,24 @@
+import { useEffect, useState } from "react";
+import { Loading } from "../../../../../components/utils/Loading";
+import useSecureAxios from "../../../../../hook/useSecureAxios";
+
 const OngoingTuition = () => {
-    const ongoing = [
-        { id: 101, title: "Class 8 Math", student: "Rahim", schedule: "Sun, Tue, Thu (7 PM)", started: "Aug 2023" }
-    ];
+    const [ongoing, setonGoings] = useState([])
+    const [loading, setLoading] = useState(true)
+    const {secureAxios} = useSecureAxios();
+    useEffect(() => {
+        secureAxios.get('/api/tutor/ongoing').then(response => {
+            console.log(response)
+            setLoading(false)
+            setonGoings(response?.data?.data?.map(item => ({
+                id: item?.tutions?._id,
+                title: item?.tutions?.className,
+                schedule: item?.tutions?.per_week
+            })))
+        })
+    },[])
+
+    if(loading) return <Loading />
 
     return (
         <div className="space-y-6">
@@ -18,16 +35,15 @@ const OngoingTuition = () => {
                                     <h3 className="font-bold text-lg text-gray-800">{item.title}</h3>
                                     <span className="bg-emerald-100 text-emerald-700 text-xs px-2 py-0.5 rounded font-bold">Active</span>
                                 </div>
-                                <p className="text-gray-500 text-sm">Student: <span className="font-medium text-gray-700">{item.student}</span></p>
                                 <p className="text-gray-500 text-sm">Schedule: {item.schedule}</p>
                             </div>
                         </div>
-                        <div className="text-right w-full md:w-auto">
+                        {/* <div className="text-right w-full md:w-auto">
                             <p className="text-xs text-gray-400 mb-2">Started: {item.started}</p>
                             <button className="px-4 py-2 border border-gray-200 text-gray-600 font-bold rounded-lg text-sm hover:bg-gray-50 transition-colors w-full md:w-auto">
                                 View Details
                             </button>
-                        </div>
+                        </div> */}
                     </div>
                 ))}
             </div>
