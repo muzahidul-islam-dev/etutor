@@ -42,9 +42,13 @@ const UserManagement = () => {
     };
 
     const handleDeleteUser = (id) => {
-        if (window.confirm("Are you sure you want to delete this user? This action cannot be undone.")) {
-            setUsers(users.filter(u => u.id !== id));
-        }
+        secureAxios.delete(`/api/admin/user/delete/${id}`).then(response => {
+            if (response?.data?.success) {
+                Swal.fire('Success', response?.data?.message, 'success')
+                setUsers(users.filter(u => u.id !== id));
+            }
+        })
+
     };
 
     const handleQuickRoleChange = (id, newRole) => {
@@ -59,7 +63,7 @@ const UserManagement = () => {
         })
     };
 
-    if(loading) return <Loading />
+    if (loading) return <Loading />
     return (
         <div className="space-y-6">
             <div className="flex justify-between items-center">
