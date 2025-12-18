@@ -116,7 +116,7 @@ const ContactPage = () => {
                             </div>
 
                             <div className="pt-4 text-right">
-                                <button type="button" className="inline-flex items-center justify-center px-8 py-4 text-sm font-bold text-white bg-slate-900 rounded-lg hover:bg-emerald-600 transition-all shadow-lg hover:shadow-emerald-200 transform hover:-translate-y-1">
+                                <button type="button" className="cursor-pointer inline-flex items-center justify-center px-8 py-4 text-sm font-bold text-white bg-slate-900 rounded-lg hover:bg-emerald-600 transition-all shadow-lg hover:shadow-emerald-200 transform hover:-translate-y-1">
                                     Send Message
                                     <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                                 </button>

@@ -1,9 +1,34 @@
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router";
+import useSecureAxios from "../../../../../hook/useSecureAxios";
+import PlaceholderImage from './../../../../../assets/placeholder.png'
 const AppliedTutors = () => {
-    const applications = [
-        { id: 1, tutorName: "Sadia Afrin", jobTitle: "Need Math Tutor for Class 9", date: "Today", status: "Pending", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sadia" },
-        { id: 2, tutorName: "Tanvir Hasan", jobTitle: "Need Math Tutor for Class 9", date: "Yesterday", status: "Rejected", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=Tanvir" },
-        { id: 3, tutorName: "Rakib Uddin", jobTitle: "Class 5 All Subjects", date: "2 days ago", status: "Shortlisted", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=Rakib" },
-    ];
+    const [searchParams] = useSearchParams();
+    const id = searchParams.get('id')
+    const [applications, setApplications] = useState([])
+    const { secureAxios } = useSecureAxios();
+
+    useEffect(() => {
+        secureAxios.get(`/api/student/applied-tutors`).then(response => {
+            if (response?.data?.success) {
+                setApplications(response?.data?.data?.map(item => ({
+                    id: item._id,
+                    tutorName: item?.name,
+                    date: item?.date ? new Date(item.date).toLocaleDateString('en-BD') : null,
+                    img: item?.image || PlaceholderImage,
+                    status: item?.status
+                })))
+            }
+        })
+    }, [])
+
+    const handlePayment = (id) => {
+        secureAxios.get(`/api/student/payment/${id}`).then(response => {
+            if (response?.data?.success) {
+                window.location.href = response?.data?.url
+            }
+        })
+    }
 
     return (
         <div className="space-y-6">
@@ -13,10 +38,9 @@ const AppliedTutors = () => {
                     <thead>
                         <tr className="bg-gray-50 text-gray-500 text-xs uppercase tracking-wider border-b border-gray-100">
                             <th className="p-4 font-semibold">Tutor Profile</th>
-                            <th className="p-4 font-semibold">Applied For</th>
                             <th className="p-4 font-semibold">Date</th>
                             <th className="p-4 font-semibold">Status</th>
-                            <th className="p-4 font-semibold text-right">Action</th>
+                            <th className="p-4 font-semibold">Status</th>
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100 text-sm">
@@ -26,16 +50,18 @@ const AppliedTutors = () => {
                                     <img src={app.img} alt="" className="w-8 h-8 rounded-full bg-gray-100" />
                                     <span className="font-medium text-gray-800">{app.tutorName}</span>
                                 </td>
-                                <td className="p-4 text-gray-600">{app.jobTitle}</td>
                                 <td className="p-4 text-gray-500">{app.date}</td>
                                 <td className="p-4">
-                                    <span className={`px-2 py-1 rounded text-xs font-bold ${
-                                        app.status === 'Shortlisted' ? 'bg-blue-50 text-blue-600' : 
+                                    <span className={`px-2 py-1 rounded text-xs font-bold ${app.status === 'completed' ? 'bg-blue-50 text-blue-600' :
                                         app.status === 'Rejected' ? 'bg-red-50 text-red-600' : 'bg-yellow-50 text-yellow-600'
-                                    }`}>{app.status}</span>
+                                        }`}>{app.status}</span>
                                 </td>
-                                <td className="p-4 text-right">
-                                    <button className="text-emerald-600 hover:underline font-medium">View Profile</button>
+                                <td className="p-4 text-gray-500">
+                                    {
+                                        app.status == 'completed' ? <span className={`px-2 py-1 rounded text-xs font-bold ${app.status === 'completed' ? 'bg-blue-50 text-blue-600' :
+                                            app.status === 'Rejected' ? 'bg-red-50 text-red-600' : 'bg-yellow-50 text-yellow-600'
+                                            }`}>Paid</span> : <button onClick={() => handlePayment(app.id)} className="bg-emerald-600 w-max cursor-pointer hover:bg-emerald-700 text-white px-4 py-2 rounded-lg font-bold text-xs shadow-md transition-all flex items-center gap-1" href="/user/student/post-new-tution" data-discover="true"><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path></svg> Pay Now</button>
+                                    }
                                 </td>
                             </tr>
                         ))}

@@ -1,4 +1,5 @@
 import { motion } from "motion/react"
+import { Link } from "react-router";
 const AboutPage = () => {
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -140,12 +141,12 @@ const AboutPage = () => {
                                 Sign up today and experience the difference.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                                <button className="bg-white text-emerald-700 font-bold py-4 px-8 rounded-xl shadow-lg hover:bg-gray-100 transition-colors">
+                                <Link to={'/user/register'} className="bg-white w-max text-emerald-700 font-bold py-4 px-8 rounded-xl shadow-lg hover:bg-gray-100 transition-colors">
                                     Become a Tutor
-                                </button>
-                                <button className="bg-emerald-800 text-white border border-emerald-500 font-bold py-4 px-8 rounded-xl hover:bg-emerald-900 transition-colors">
+                                </Link>
+                                <Link to={'/tutors'} className="bg-emerald-800 text-white border border-emerald-500 font-bold py-4 px-8 rounded-xl hover:bg-emerald-900 transition-colors">
                                     Find a Tutor
-                                </button>
+                                </Link>
                             </div>
                         </div>
                     </div>

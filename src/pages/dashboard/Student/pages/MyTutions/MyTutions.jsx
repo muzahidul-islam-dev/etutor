@@ -65,7 +65,7 @@ const MyTutions = () => {
                             <div className="text-right flex flex-col justify-center">
                                 <p className="text-2xl font-bold text-gray-800">{post.applications}</p>
                                 <p className="text-xs text-gray-500 mb-3">Applicants</p>
-                                <button className="bg-emerald-50 text-emerald-600 px-4 py-2 rounded-lg text-xs font-bold hover:bg-emerald-100 transition-colors">View Details</button>
+                                <Link to={`/user/student/applied-tutors/${post.id}`} className="bg-emerald-50 text-emerald-600 px-4 py-2 rounded-lg text-xs font-bold hover:bg-emerald-100 transition-colors">View Details</Link>
                             </div>
                         </div>
                     </div>

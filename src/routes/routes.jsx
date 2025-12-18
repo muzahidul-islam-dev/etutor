@@ -26,6 +26,8 @@ import TuitionManagement from "../pages/dashboard/Admin/pages/TutionManagement/T
 import ReportAnalysis from "../pages/dashboard/Admin/pages/ReportAnalysis/ReportAnalysis";
 import { Privateroutes } from "./PrivateRoutes";
 import { Authlayout } from "../components/shared/AuthLayout";
+import AppliedTutorByTuition from "../pages/frontend/AppliedTutorByTuition/AppliedTutorByTuition";
+import PaymentSuccess from "../pages/frontend/payment/PaymentSuccess";
 
 const routes = createBrowserRouter([
     {
@@ -61,6 +63,10 @@ const routes = createBrowserRouter([
                 element: <AboutPage />
             },
             {
+                path: '/payment-success',
+                element: <PaymentSuccess />
+            },
+            {
                 path: 'user',
                 element: <Authlayout />,
                 children: [
@@ -93,6 +99,10 @@ const routes = createBrowserRouter([
                             {
                                 path: 'applied-tutors',
                                 element: <AppliedTutors />
+                            },
+                            {
+                                path: 'applied-tutors/:id',
+                                element: <AppliedTutorByTuition />
                             },
                             {
                                 path: 'payment-history',

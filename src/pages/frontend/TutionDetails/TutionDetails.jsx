@@ -1,10 +1,155 @@
-import { motion } from "motion/react"
+import { AnimatePresence, motion } from "motion/react"
 import { useEffect, useState } from "react";
 import useSecureAxios from "../../../hook/useSecureAxios";
 import { useNavigate, useParams } from "react-router";
 import Swal from "sweetalert2";
 import { Loading } from "../../../components/utils/Loading";
+import useAuth from "../../../hook/useAuth";
+import { useForm } from "react-hook-form";
+
+
+const ApplyModal = ({ isOpen, onClose, jobInfo, user }) => {
+    if (!isOpen) return null;
+    const {secureAxios} = useSecureAxios();
+
+    const { handleSubmit, register, formState: { errors } } = useForm();
+
+    const tutorData = {
+        name: user?.displayName,
+        email: user?.email
+    };
+    
+
+    const onSubmit = (data) => {
+        const applyData = {
+            tuition_id: jobInfo.id,
+            qualifications: data.qualifications,
+            experience: data.experience,
+            salary: data.salary
+        }
+        console.log(applyData, jobInfo, 'information')
+        secureAxios.post('/api/tutor/apply',applyData).then(response => {
+            console.log(response)
+        })
+        onClose();
+    };
+
+    return (
+        <div className="fixed inset-0 z-100 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+            <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                className="bg-white rounded-xl shadow-2xl w-full max-w-lg overflow-hidden"
+            >
+                <div className="bg-emerald-600 px-6 py-4 flex justify-between items-center">
+                    <h3 className="text-white font-bold text-lg">Apply for Tuition</h3>
+                    <button onClick={onClose} className="text-white/80 hover:text-white transition-colors">
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                    </button>
+                </div>
+
+                <div className="px-6 py-3 bg-emerald-50 border-b border-emerald-100">
+                    <p className="text-sm text-emerald-800 font-medium">Applying for: <span className="font-bold">{jobInfo.title}</span></p>
+                </div>
+
+                <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-5">
+                    {/* Read-only Fields */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label className="block text-xs font-bold text-gray-500 uppercase mb-1">Name</label>
+                            <input
+                                type="text"
+                                value={tutorData.name}
+                                readOnly
+                                className="w-full px-3 py-2 bg-gray-100 border border-gray-200 rounded-lg text-gray-600 cursor-not-allowed focus:outline-none"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-xs font-bold text-gray-500 uppercase mb-1">Email</label>
+                            <input
+                                type="email"
+                                value={tutorData.email}
+                                readOnly
+                                className="w-full px-3 py-2 bg-gray-100 border border-gray-200 rounded-lg text-gray-600 cursor-not-allowed focus:outline-none"
+                            />
+                        </div>
+                    </div>
+
+                    {/* Tutor Input Fields */}
+                    <div>
+                        <label className="block text-sm font-semibold text-gray-700 mb-1">Qualifications <span className="text-red-500">*</span></label>
+                        <input
+                            type="text"
+                            placeholder="e.g. BSc in Mathematics, BUET"
+                            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all placeholder:text-gray-400"
+                            required
+                            {...register('qualifications', {
+                                required: true
+                            })}
+                        />
+                        {
+                            errors?.qualifications && <label htmlFor="" className="text-red-500">Qualification field is required</label>
+                        }
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label className="block text-sm font-semibold text-gray-700 mb-1">Experience <span className="text-red-500">*</span></label>
+                            <input
+                                type="text"
+                                placeholder="e.g. 2 Years"
+                                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all placeholder:text-gray-400"
+                                required
+                                {...register('experience', {
+                                    required: true
+                                })}
+                            />
+                            {
+                                errors?.experience && <label htmlFor="" className="text-red-500">Experience field is required</label>
+                            }
+                        </div>
+                        <div>
+                            <label className="block text-sm font-semibold text-gray-700 mb-1">Expected Salary (BDT) <span className="text-red-500">*</span></label>
+                            <input
+                                type="number"
+                                placeholder="e.g. 5000"
+                                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all placeholder:text-gray-400"
+                                required
+                                {...register('salary',{
+                                    required: true
+                                })}
+                            />
+                            {
+                                errors?.salary && <label htmlFor="" className="text-red-500">Salary field is required</label>
+                            }
+                        </div>
+                    </div>
+
+                    <div className="pt-4 flex justify-end gap-3 border-t border-gray-100 mt-4">
+                        <button
+                            type="button"
+                            onClick={onClose}
+                            className="px-5 py-2.5 text-gray-600 font-semibold hover:bg-gray-100 rounded-lg transition-colors"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            type="submit"
+                            className="px-6 py-2.5 bg-emerald-600 text-white font-bold rounded-lg shadow-md hover:bg-emerald-700 hover:shadow-lg transition-all transform hover:-translate-y-0.5"
+                        >
+                            Submit Application
+                        </button>
+                    </div>
+                </form>
+            </motion.div>
+        </div>
+    );
+};
+
 const TuitionDetailsPage = () => {
+    const [isApplyModalOpen, setIsApplyModalOpen] = useState(false)
+    const { user, userRoleLoading, loading: userLoading, userRole } = useAuth();
     const [tuition, setTuition] = useState({});
     const { secureAxios } = useSecureAxios();
     const navigate = useNavigate();
@@ -31,6 +176,7 @@ const TuitionDetailsPage = () => {
         })
     }, [id])
     const job = {
+        id: tuition?._id,
         title: tuition?.title,
         posted_date: tuition?.createdAt ? new Date(tuition.createdAt).toLocaleDateString('en-BD') : null,
         status: "Active",
@@ -44,13 +190,7 @@ const TuitionDetailsPage = () => {
         description: tuition?.description
     };
 
-    const similarJobs = [
-        { id: 2, title: "Class 8 Math Tutor", location: "Kalabagan", salary: "4500" },
-        { id: 3, title: "HSC Chemistry Tutor", location: "Lalmatia", salary: "7000" },
-        { id: 4, title: "English Version Class 5", location: "Jigatola", salary: "5000" },
-    ];
-
-    if (loading) return <Loading />
+    if (loading || userLoading || userRoleLoading) return <Loading />
 
     return (
         <div className="min-h-screen bg-gray-50 pt-28 pb-12">
@@ -149,9 +289,13 @@ const TuitionDetailsPage = () => {
                                 <h2 className="text-3xl font-extrabold text-emerald-600">{job.salary} BDT</h2>
                             </div>
 
-                            <button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl shadow-md shadow-emerald-200 hover:shadow-emerald-300 transition-all transform hover:-translate-y-0.5 mb-3 cursor-pointer">
-                                Apply Now
-                            </button>
+                            {
+                                user && userRole == 'tutor' && (
+                                    <button onClick={() => setIsApplyModalOpen(true)} className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl shadow-md shadow-emerald-200 hover:shadow-emerald-300 transition-all transform hover:-translate-y-0.5 mb-3 cursor-pointer">
+                                        Apply Now
+                                    </button>
+                                )
+                            }
 
                             <div className="mt-6 pt-6 border-t border-gray-100">
                                 <h4 className="text-sm font-bold text-gray-700 mb-3">Safety Tips</h4>
@@ -167,6 +311,16 @@ const TuitionDetailsPage = () => {
                     </div>
                 </div>
             </div>
+            <AnimatePresence>
+                {isApplyModalOpen && (
+                    <ApplyModal
+                        isOpen={isApplyModalOpen}
+                        onClose={() => setIsApplyModalOpen(false)}
+                        jobInfo={job}
+                        user={user}
+                    />
+                )}
+            </AnimatePresence>
         </div>
     );
 };
