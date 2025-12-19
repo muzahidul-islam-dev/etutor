@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 import useSecureAxios from "../../../../../hook/useSecureAxios";
 import PlaceholderImage from './../../../../../assets/placeholder.png'
+import Swal from "sweetalert2";
 const AppliedTutors = () => {
     const [searchParams] = useSearchParams();
     const id = searchParams.get('id')
@@ -13,6 +14,7 @@ const AppliedTutors = () => {
             if (response?.data?.success) {
                 setApplications(response?.data?.data?.map(item => ({
                     id: item._id,
+                    tuition_id: item?.tuitionsId,
                     tutorName: item?.name,
                     date: item?.date ? new Date(item.date).toLocaleDateString('en-BD') : null,
                     img: item?.image || PlaceholderImage,
@@ -30,6 +32,27 @@ const AppliedTutors = () => {
         })
     }
 
+    const handleReject = (id) => {
+        secureAxios.get(`/api/student/tutor/reject/${id}`).then(response => {
+            if (response?.data?.success) {
+                Swal.fire('Success', response?.data?.message, 'success')
+
+                secureAxios.get(`/api/student/applied-tutors`).then(response => {
+                    if (response?.data?.success) {
+                        setApplications(response?.data?.data?.map(item => ({
+                            id: item._id,
+                            tuition_id: item?.tuitionsId,
+                            tutorName: item?.name,
+                            date: item?.date ? new Date(item.date).toLocaleDateString('en-BD') : null,
+                            img: item?.image || PlaceholderImage,
+                            status: item?.status
+                        })))
+                    }
+                })
+            }
+        })
+    }
+
     return (
         <div className="space-y-6">
             <h2 className="text-2xl font-bold text-gray-800">Applied Tutors</h2>
@@ -40,7 +63,7 @@ const AppliedTutors = () => {
                             <th className="p-4 font-semibold">Tutor Profile</th>
                             <th className="p-4 font-semibold">Date</th>
                             <th className="p-4 font-semibold">Status</th>
-                            <th className="p-4 font-semibold">Status</th>
+                            <th className="p-4 font-semibold">Action</th>
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100 text-sm">
@@ -56,11 +79,20 @@ const AppliedTutors = () => {
                                         app.status === 'Rejected' ? 'bg-red-50 text-red-600' : 'bg-yellow-50 text-yellow-600'
                                         }`}>{app.status}</span>
                                 </td>
-                                <td className="p-4 text-gray-500">
+                                <td className="p-4 text-gray-500 flex gap-2">
                                     {
-                                        app.status == 'completed' ? <span className={`px-2 py-1 rounded text-xs font-bold ${app.status === 'completed' ? 'bg-blue-50 text-blue-600' :
-                                            app.status === 'Rejected' ? 'bg-red-50 text-red-600' : 'bg-yellow-50 text-yellow-600'
-                                            }`}>Paid</span> : <button onClick={() => handlePayment(app.id)} className="bg-emerald-600 w-max cursor-pointer hover:bg-emerald-700 text-white px-4 py-2 rounded-lg font-bold text-xs shadow-md transition-all flex items-center gap-1" href="/user/student/post-new-tution" data-discover="true"><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path></svg> Pay Now</button>
+                                        app.status == 'completed' && <span className={`px-2 py-1 rounded text-xs font-bold bg-blue-50 text-blue-600'
+                                            }`}>Paid</span>
+                                    }
+                                    {
+                                        app.status === 'pending' && <button onClick={() => handlePayment(app.tuition_id)} className="bg-emerald-600 w-max cursor-pointer hover:bg-emerald-700 text-white px-4 py-2 rounded-lg font-bold text-xs shadow-md transition-all flex items-center gap-1" href="/user/student/post-new-tution" data-discover="true">Pay Now</button>
+                                    }
+                                    {
+                                        app.status === 'pending' && <button onClick={() => handleReject(app.tuition_id)} className="bg-red-500 w-max cursor-pointer hover:bg-emerald-700 text-white px-4 py-2 rounded-lg font-bold text-xs shadow-md transition-all flex items-center gap-1" href="/user/student/post-new-tution" data-discover="true">Reject</button>
+                                    }
+                                    {
+                                        app.status == 'rejected' && <span className={`px-2 py-1 rounded text-xs font-bold bg-red-50 text-red-600'
+                                            }`}>Rejected</span>
                                     }
                                 </td>
                             </tr>
