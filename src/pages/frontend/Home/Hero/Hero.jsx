@@ -69,7 +69,7 @@ export function Hero() {
                                 transition={{ duration: 0.5, delay: 0.3 }}
                                 className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
                             >
-                                <Link to={'/tutors'}>
+                                <Link to={'/tutors'} className="flex justify-center sm:justify-start">
                                     <motion.button
                                         whileHover={{ scale: 1.05 }}
                                         whileTap={{ scale: 0.95 }}

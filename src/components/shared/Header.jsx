@@ -136,8 +136,6 @@ export function Header() {
                                                     <p className="text-sm font-bold text-gray-800">{user?.displayName}</p>
                                                     <p className="text-xs text-gray-500">{user?.email}</p>
                                                 </div>
-                                                <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50 hover:text-emerald-600">Profile</a>
-                                                <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50 hover:text-emerald-600">Settings</a>
                                                 <button
                                                     onClick={handleLogout}
                                                     className="w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-red-50 font-medium cursor-pointer"

@@ -193,7 +193,8 @@ export default function AuthProvider({ children }) {
         userRole,
         userRoleLoading,
         setUser,
-        setUserRole
+        setUserRole,
+        profileUpdate
     }
     return <AuthContext.Provider value={data}>{children}</AuthContext.Provider>
 }
