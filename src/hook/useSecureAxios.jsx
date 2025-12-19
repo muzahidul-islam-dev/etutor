@@ -10,16 +10,13 @@ export default function useSecureAxios() {
     const { user, loading: userLoading } = useAuth();
     const [loading, setLoading] = useState(true)
     useEffect(() => {
-        if (!userLoading && user) {
-            secureAxios.interceptors.request.use(function (config) {
-                config.headers.Authorization = `Bearer ${user?.accessToken}`
-                return config;
-            })
-            setLoading(false)
-        }else{
-            if(!userLoading){
-                setLoading(false)
-            }
+        const requestIntercepter = secureAxios.interceptors.request.use(function (config) {
+            config.headers.Authorization = `Bearer ${user?.accessToken}`
+            return config;
+        })
+        setLoading(false)
+        return () => {
+            secureAxios.interceptors.request.eject(requestIntercepter)
         }
     }, [user, userLoading])
 

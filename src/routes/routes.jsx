@@ -79,8 +79,10 @@ const routes = createBrowserRouter([
                         element: <Login />
                     }
                 ]
-            },
-            {
+            }
+        ]
+    },
+    {
                 path: 'user',
                 element: <Privateroutes><Outlet /></Privateroutes>,
                 children: [
@@ -152,8 +154,6 @@ const routes = createBrowserRouter([
                     }
                 ]
             }
-        ]
-    }
 ]);
 
 export default routes;

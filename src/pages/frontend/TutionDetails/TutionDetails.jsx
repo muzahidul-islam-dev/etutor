@@ -29,7 +29,9 @@ const ApplyModal = ({ isOpen, onClose, jobInfo, user }) => {
         }
         console.log(applyData, jobInfo, 'information')
         secureAxios.post('/api/tutor/apply',applyData).then(response => {
-            console.log(response)
+            if(response?.data?.success){
+                Swal.fire('Success', response?.data?.message, 'success')
+            }
         })
         onClose();
     };

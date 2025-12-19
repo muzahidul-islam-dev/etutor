@@ -1,9 +1,22 @@
+import { useEffect, useState } from "react";
+import useSecureAxios from "../../../../../hook/useSecureAxios";
+
 const ReportAnalysis = () => {
-    const transactions = [
-        { id: "TX-1001", user: "Muzahidul Islam", type: "Post Fee", amount: "+500 BDT", date: "Today, 10:00 AM" },
-        { id: "TX-1002", user: "Rahim Ahmed", type: "Subscription", amount: "+2000 BDT", date: "Yesterday" },
-        { id: "TX-1003", user: "Karim", type: "Post Fee", amount: "+500 BDT", date: "12 Oct, 2023" },
-    ];
+    const [transactions, setTransactions] = useState([])
+    const [loading, setLoading] = useState(true)
+    const {secureAxios} = useSecureAxios();
+    useEffect(() => {
+        secureAxios.get('/api/admin/revenew').then(response => {
+            if(response?.data?.success){
+                setTransactions(response?.data?.data?.map(item => ({
+                    user: item?.user?.name,
+                    amount: item?.salary,
+                    type: item?.tuition?.title
+                })))
+            }
+        })
+    },[])
+    console.log(transactions, 'sss')
 
     return (
         <div className="space-y-8">
@@ -11,7 +24,7 @@ const ReportAnalysis = () => {
 
             {/* Overview Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-gradient-to-br from-slate-800 to-slate-900 text-white p-6 rounded-xl shadow-lg">
+                <div className="bg-linear-to-br from-slate-800 to-slate-900 text-white p-6 rounded-xl shadow-lg">
                     <p className="text-slate-400 text-sm font-medium uppercase tracking-wider mb-1">Total Platform Earnings</p>
                     <h3 className="text-3xl font-bold">15,000 BDT</h3>
                     <p className="text-emerald-400 text-xs mt-2 flex items-center gap-1">
@@ -39,21 +52,17 @@ const ReportAnalysis = () => {
                 <table className="w-full text-left">
                     <thead className="bg-slate-50 text-xs uppercase text-slate-500 font-semibold">
                         <tr>
-                            <th className="p-4">Transaction ID</th>
                             <th className="p-4">User</th>
-                            <th className="p-4">Type</th>
-                            <th className="p-4">Date</th>
+                            <th className="p-4">Job</th>
                             <th className="p-4 text-right">Amount</th>
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100 text-sm">
                         {transactions.map((tx) => (
                             <tr key={tx.id} className="hover:bg-slate-50 transition-colors">
-                                <td className="p-4 font-mono text-slate-600">{tx.id}</td>
                                 <td className="p-4 font-medium text-gray-800">{tx.user}</td>
-                                <td className="p-4 text-gray-600">{tx.type}</td>
-                                <td className="p-4 text-gray-500">{tx.date}</td>
-                                <td className="p-4 text-right font-bold text-emerald-600">{tx.amount}</td>
+                                <td className="p-4 text-gray-500">{tx.type}</td>
+                                <td className="p-4 text-right font-bold text-emerald-600">+{tx.amount}</td>
                             </tr>
                         ))}
                     </tbody>

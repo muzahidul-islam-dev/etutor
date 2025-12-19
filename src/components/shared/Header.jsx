@@ -46,10 +46,11 @@ export function Header() {
     }, []);
 
     const handleLogout = async () => {
-        setIsLoggedIn(false); 
+        setIsLoggedIn(false);
         setIsProfileOpen(false);
         const result = await logout();
         console.log(result)
+        Swal.fire('Success', 'Logout Successfully', 'success')
     }
 
     const navLinks = [
